@@ -1,13 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://eckkr1nvkw66"]
 
-[ext_resource type="Texture2D" uid="uid://caqojhnkp5jy6" path="res://icon.svg" id="1_6pnam"]
-[ext_resource type="Script" path="res://button.gd" id="2_yod40"]
+[ext_resource type="Script" path="res://canvas_layer.gd" id="1_hd0um"]
+[ext_resource type="Texture2D" uid="uid://ho66u4m2dw0f" path="res://3031.webp" id="2_svuy7"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_hd0um")
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 anchors_preset = 8
@@ -23,16 +24,27 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Button" type="Button" parent="CanvasLayer/Panel"]
-offset_left = 756.0
+offset_left = 846.0
 offset_top = 36.5
-offset_right = 892.0
-offset_bottom = 172.5
-icon = ExtResource("1_6pnam")
-script = ExtResource("2_yod40")
+offset_right = 1110.0
+offset_bottom = 300.5
+scale = Vector2(0.310183, 0.310183)
+icon = ExtResource("2_svuy7")
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Panel/Button"]
+layout_mode = 0
+offset_left = 9.67165
+offset_top = 280.48
+offset_right = 267.672
+offset_bottom = 412.48
+text = "3600"
 
 [node name="TextEdit" type="TextEdit" parent="CanvasLayer/Panel"]
 layout_mode = 0
-offset_right = 473.0
-offset_bottom = 365.0
+offset_left = 11.0
+offset_top = 15.5
+offset_right = 263.0
+offset_bottom = 84.5
+text = "Gold=100"
 
-[connection signal="pressed" from="CanvasLayer/Panel/Button" to="CanvasLayer/Panel/Button" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/Button" to="CanvasLayer" method="_on_button_pressed"]
