@@ -1,9 +1,38 @@
-[gd_scene format=3 uid="uid://cfu44dfqhus48"]
+[gd_scene load_steps=3 format=3 uid="uid://eckkr1nvkw66"]
+
+[ext_resource type="Texture2D" uid="uid://caqojhnkp5jy6" path="res://icon.svg" id="1_6pnam"]
+[ext_resource type="Script" path="res://button.gd" id="2_yod40"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="teslktklasdfklasdfljk" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -498.0
+offset_top = -241.5
+offset_right = 498.0
+offset_bottom = 241.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Panel"]
+offset_left = 756.0
+offset_top = 36.5
+offset_right = 892.0
+offset_bottom = 172.5
+icon = ExtResource("1_6pnam")
+script = ExtResource("2_yod40")
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_right = 473.0
+offset_bottom = 365.0
+
+[connection signal="pressed" from="CanvasLayer/Panel/Button" to="CanvasLayer/Panel/Button" method="_on_pressed"]
