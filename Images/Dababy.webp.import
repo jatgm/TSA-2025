@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ck2bsigopn1fk"
-path="res://.godot/imported/Dababy.webp-5c63035305441908bed31b864c5b40e7.ctex"
+path="res://.godot/imported/Dababy.webp-75c16ba663cae97dbfac482f964a7492.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dababy.webp"
-dest_files=["res://.godot/imported/Dababy.webp-5c63035305441908bed31b864c5b40e7.ctex"]
+source_file="res://Images/Dababy.webp"
+dest_files=["res://.godot/imported/Dababy.webp-75c16ba663cae97dbfac482f964a7492.ctex"]
 
 [params]
 

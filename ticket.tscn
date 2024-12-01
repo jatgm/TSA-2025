@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://clhq2hycm1d1i"]
+
+[ext_resource type="Script" path="res://Scripts/ticket.gd" id="1_pyqph"]
+
+[node name="ticket" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 250.0
+offset_bottom = 194.0
+script = ExtResource("1_pyqph")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 249.0
+offset_bottom = 233.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = 240.0
+offset_bottom = 233.0
+theme_override_font_sizes/normal_font_size = 71
+text = "bread
+"
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 248.0
+offset_bottom = 28.0
+value = 100.0
