@@ -1,3 +1,38 @@
-[gd_scene format=3 uid="uid://cmabkl5neyb3"]
+[gd_scene load_steps=5 format=3 uid="uid://cmabkl5neyb3"]
+
+[ext_resource type="Texture2D" uid="uid://ck2bsigopn1fk" path="res://Dababy.webp" id="1_6u2p8"]
+[ext_resource type="Script" path="res://playerone.gd" id="1_oq5gb"]
+[ext_resource type="Script" path="res://playertwo.gd" id="3_nwb4p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e18vh"]
+size = Vector2(264.5, 110)
 
 [node name="Game" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="playerone" type="CharacterBody2D" parent="."]
+position = Vector2(162, 61)
+script = ExtResource("1_oq5gb")
+
+[node name="Sprite2D" type="Sprite2D" parent="playerone"]
+position = Vector2(-423, -203)
+scale = Vector2(0.277895, 0.0966173)
+texture = ExtResource("1_6u2p8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerone"]
+position = Vector2(-423.25, -201)
+shape = SubResource("RectangleShape2D_e18vh")
+
+[node name="playertwo" type="CharacterBody2D" parent="."]
+position = Vector2(555, 120)
+script = ExtResource("3_nwb4p")
+
+[node name="Sprite2D" type="Sprite2D" parent="playertwo"]
+position = Vector2(-423, -202.652)
+scale = Vector2(0.276544, 0.0968418)
+texture = ExtResource("1_6u2p8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playertwo"]
+position = Vector2(-423.25, -201)
+shape = SubResource("RectangleShape2D_e18vh")
