@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://eckkr1nvkw66"]
+[gd_scene format=3 uid="uid://cfu44dfqhus48"]
 
-[node name="yellow" type="Node2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="teslktklasdfklasdfljk" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
