@@ -55,11 +55,18 @@ offset_right = 1922.0
 offset_bottom = 362.0
 theme_override_constants/separation = 300
 
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="add ticket button" type="Button" parent="CanvasLayer"]
 offset_left = 198.0
 offset_top = 710.0
 offset_right = 283.0
 offset_bottom = 741.0
 text = "add ticket"
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -866.0
+offset_top = -477.0
+offset_right = 907.0
+offset_bottom = 486.0
+
+[connection signal="pressed" from="CanvasLayer/add ticket button" to="." method="_on_button_pressed"]
