@@ -12,7 +12,7 @@ script = ExtResource("1_44qpi")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_hd0um")
+script = ExtResource("1_jgbb7")
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 anchors_preset = 8
@@ -34,7 +34,7 @@ offset_top = 36.5
 offset_right = 1110.0
 offset_bottom = 300.5
 scale = Vector2(0.310183, 0.310183)
-icon = ExtResource("2_svuy7")
+icon = ExtResource("2_aj0ee")
 
 [node name="TextEdit" type="TextEdit" parent="CanvasLayer/Panel/Button"]
 layout_mode = 0
