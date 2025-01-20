@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://eckkr1nvkw66"]
+[gd_scene load_steps=5 format=3 uid="uid://eckkr1nvkw66"]
 
+[ext_resource type="Script" path="res://open.gd" id="1_44qpi"]
 [ext_resource type="Script" path="res://canvas_layer.gd" id="1_hd0um"]
 [ext_resource type="Texture2D" uid="uid://ho66u4m2dw0f" path="res://3031.webp" id="2_svuy7"]
+[ext_resource type="Script" path="res://time_Left.gd" id="4_ide8g"]
 
 [node name="Node2D" type="Node2D"]
+visible = false
+script = ExtResource("1_44qpi")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -24,6 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Button" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 0
 offset_left = 846.0
 offset_top = 36.5
 offset_right = 1110.0
@@ -47,4 +52,22 @@ offset_right = 263.0
 offset_bottom = 84.5
 text = "Gold=100"
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Time" type="TextEdit" parent="CanvasLayer2"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.5
+offset_top = 32.0
+offset_right = 53.5
+offset_bottom = 74.0
+grow_horizontal = 2
+script = ExtResource("4_ide8g")
+
 [connection signal="pressed" from="CanvasLayer/Panel/Button" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
