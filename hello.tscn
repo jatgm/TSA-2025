@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1nfhk15ovkc1"]
+
+[ext_resource type="Script" path="res://Gold.gd" id="1_t076w"]
+[ext_resource type="Script" path="res://time_Left.gd" id="4_ide8g"]
+[ext_resource type="Script" path="res://Buffs.gd" id="4_sn468"]
+
+[node name="Node2D" type="Node2D"]
+visible = false
+script = ExtResource("4_sn468")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_t076w")
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -498.0
+offset_top = -241.5
+offset_right = 498.0
+offset_bottom = 241.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SecondItem" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 118.5
+offset_right = 1022.0
+offset_bottom = 718.5
+scale = Vector2(0.310183, 0.310183)
+
+[node name="SecondText" type="TextEdit" parent="CanvasLayer/Panel/SecondItem"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 615.766
+offset_bottom = 725.766
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = "5000
+"
+
+[node name="ThirdItem" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 709.0
+offset_top = 114.5
+offset_right = 1309.0
+offset_bottom = 714.5
+scale = Vector2(0.310183, 0.310183)
+
+[node name="ThirdText" type="TextEdit" parent="CanvasLayer/Panel/ThirdItem"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 615.766
+offset_bottom = 725.766
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = "5000
+"
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 15.5
+offset_right = 263.0
+offset_bottom = 84.5
+text = "10000
+"
+
+[node name="FirstItem" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 117.5
+offset_right = 701.0
+offset_bottom = 717.5
+scale = Vector2(0.310183, 0.310183)
+
+[node name="FirstText" type="TextEdit" parent="CanvasLayer/Panel/FirstItem"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 615.766
+offset_bottom = 725.766
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = "5000
+"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Time" type="TextEdit" parent="CanvasLayer2"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.5
+offset_top = 32.0
+offset_right = 53.5
+offset_bottom = 74.0
+grow_horizontal = 2
+script = ExtResource("4_ide8g")
+
+[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="." method="_on_second_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_second_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="." method="_on_third_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="CanvasLayer" method="_on_third_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="." method="_on_first_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="CanvasLayer" method="_on_first_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="CanvasLayer2/Time" method="_on_timer_timeout"]
