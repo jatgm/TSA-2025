@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://vrl4xv716d7p"]
+
+[ext_resource type="Script" path="res://Scripts/interaction_manager.gd" id="1_fn1wo"]
+
+[node name="InteractionManager" type="Area2D"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_fn1wo")
+
+[node name="InteractingRegion" type="CollisionShape2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="InteractedRegion" type="CollisionShape2D" parent="Area2D"]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

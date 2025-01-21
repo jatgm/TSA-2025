@@ -1,7 +1,5 @@
-extends CharacterBody2D
+extends Player
 
-@export var move_speed : float = 700
-@export var starting_direction : Vector2 = Vector2(0, 1)
 
 func _physics_process(_delta): # happens 60 times a sec, underscore can represent unused variable
 
@@ -13,3 +11,4 @@ func _physics_process(_delta): # happens 60 times a sec, underscore can represen
 
 	#built in function for characterbody new godot 4! :D
 	move_and_slide()
+	update_animation_parameters(input_direction)

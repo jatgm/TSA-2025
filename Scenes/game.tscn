@@ -1,43 +1,25 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmabkl5neyb3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_fsq2d"]
-[ext_resource type="Script" path="res://Scripts/playerone.gd" id="1_ljg74"]
-[ext_resource type="Texture2D" uid="uid://ck2bsigopn1fk" path="res://Images/Dababy.webp" id="2_tmxxm"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="2_30gcq"]
+[ext_resource type="PackedScene" uid="uid://ccsxyldn8rq54" path="res://Scenes/playerone.tscn" id="3_cnwn3"]
 [ext_resource type="Script" path="res://Scripts/playertwo.gd" id="3_ru1wl"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e18vh"]
-size = Vector2(264.5, 110)
+[ext_resource type="PackedScene" uid="uid://bc635cnjd78q1" path="res://Scenes/stove.tscn" id="5_e1afk"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_fsq2d")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.9, 0.9)
+script = ExtResource("2_30gcq")
 
-[node name="playerone" type="CharacterBody2D" parent="."]
-position = Vector2(225, 123)
-script = ExtResource("1_ljg74")
-
-[node name="Sprite2D" type="Sprite2D" parent="playerone"]
-position = Vector2(-423, -203)
-scale = Vector2(0.277895, 0.0966173)
-texture = ExtResource("2_tmxxm")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="playerone"]
-position = Vector2(-423.25, -201)
-shape = SubResource("RectangleShape2D_e18vh")
-
-[node name="playertwo" type="CharacterBody2D" parent="."]
-position = Vector2(771, 16)
+[node name="playertwo" parent="." instance=ExtResource("3_cnwn3")]
 script = ExtResource("3_ru1wl")
 
-[node name="Sprite2D" type="Sprite2D" parent="playertwo"]
-position = Vector2(-423, -202.652)
-scale = Vector2(0.276544, 0.0968418)
-texture = ExtResource("2_tmxxm")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="playertwo"]
-position = Vector2(-423.25, -201)
-shape = SubResource("RectangleShape2D_e18vh")
+[node name="playerone" parent="." instance=ExtResource("3_cnwn3")]
+position = Vector2(239, -159)
+move_speed = 700.0
+starting_direction = Vector2(0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -69,5 +51,8 @@ offset_top = -293.0
 offset_right = 562.0
 offset_bottom = 302.0
 color = Color(0.347817, 0.347817, 0.347817, 1)
+
+[node name="stove" parent="." instance=ExtResource("5_e1afk")]
+position = Vector2(-489, -38)
 
 [connection signal="pressed" from="CanvasLayer/add ticket button" to="." method="_on_button_pressed"]

@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
+class_name Player
+
 @export var move_speed : float = 700
 @export var starting_direction : Vector2 = Vector2(0, 1)
+@onready var state_machine = $AnimationTree.get("parameters/playback")
 
 func _physics_process(_delta): # happens 60 times a sec, underscore can represent unused variable
 
@@ -13,3 +16,17 @@ func _physics_process(_delta): # happens 60 times a sec, underscore can represen
 
 	#built in function for characterbody new godot 4! :D
 	move_and_slide()
+	update_animation_parameters(input_direction)
+	
+	if Input.is_action_just_pressed("interact"):
+		$Pivot/InteractionManager.initiate_interaction()
+		print("pressed e")
+
+func update_animation_parameters(move_input : Vector2):
+	if move_input != Vector2.ZERO:
+
+		$AnimationTree.set("parameters/walk/blend_position", move_input)
+
+	if velocity != Vector2.ZERO:
+		state_machine.travel("walk")
+	
