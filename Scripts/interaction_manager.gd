@@ -6,11 +6,10 @@ var current_interaction : InteractionManager
 
 func initiate_interaction() -> void:
 	if current_interaction != null:
-		current_interaction.recieve_interaction($"../../.") # gives the cat
+		current_interaction.recieve_interaction($"../../.") # gives the player
 
 func receive_interaction(interacter) -> void:
 	pass
-
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	current_interaction = area
