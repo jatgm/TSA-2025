@@ -1,23 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmabkl5neyb3"]
+[gd_scene load_steps=8 format=3 uid="uid://cmabkl5neyb3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_fsq2d"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_30gcq"]
 [ext_resource type="PackedScene" uid="uid://ccsxyldn8rq54" path="res://Scenes/playerone.tscn" id="3_cnwn3"]
 [ext_resource type="Script" path="res://Scripts/playertwo.gd" id="3_ru1wl"]
+[ext_resource type="Texture2D" uid="uid://b82d0rdlonjqy" path="res://Images/char2walkingspritesheet.png" id="5_1v5s8"]
 [ext_resource type="PackedScene" uid="uid://bc635cnjd78q1" path="res://Scenes/stove.tscn" id="5_e1afk"]
+[ext_resource type="Texture2D" uid="uid://b8ayv4mchl75n" path="res://Images/dayandnighttilemap.png" id="7_b7hih"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_fsq2d")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.9, 0.9)
+zoom = Vector2(3.5, 3.5)
 script = ExtResource("2_30gcq")
 
 [node name="playertwo" parent="." instance=ExtResource("3_cnwn3")]
+position = Vector2(-75, 10)
 script = ExtResource("3_ru1wl")
 
+[node name="Sprite2D" parent="playertwo" index="0"]
+texture = ExtResource("5_1v5s8")
+
 [node name="playerone" parent="." instance=ExtResource("3_cnwn3")]
-position = Vector2(239, -159)
+position = Vector2(58, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -53,4 +59,13 @@ color = Color(0.347817, 0.347817, 0.347817, 1)
 [node name="stove" parent="." instance=ExtResource("5_e1afk")]
 position = Vector2(-489, -38)
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("7_b7hih")
+vframes = 2
+frame = 1
+
 [connection signal="pressed" from="CanvasLayer/add ticket button" to="." method="_on_button_pressed"]
+
+[editable path="playertwo"]
+[editable path="playertwo/Pivot/InteractionManager"]
