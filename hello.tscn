@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkexc7cf1e333"]
+[gd_scene load_steps=5 format=3 uid="uid://bkexc7cf1e333"]
 
 [ext_resource type="Script" path="res://Gold.gd" id="1_t076w"]
+[ext_resource type="Script" path="res://Close.gd" id="3_ifev1"]
 [ext_resource type="Script" path="res://time_Left.gd" id="4_ide8g"]
 [ext_resource type="Script" path="res://Buffs.gd" id="4_sn468"]
 
@@ -92,6 +93,15 @@ theme_override_font_sizes/font_size = 60
 text = "5000
 "
 
+[node name="Close" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 816.0
+offset_top = 22.0
+offset_right = 977.0
+offset_bottom = 75.0
+text = "CLOSE"
+script = ExtResource("3_ifev1")
+
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
@@ -120,5 +130,6 @@ script = ExtResource("4_ide8g")
 [connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="." method="_on_first_item_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="CanvasLayer" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="CanvasLayer" method="_on_first_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/Close" to="CanvasLayer/Panel/Close" method="_on_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="CanvasLayer2/Time" method="_on_timer_timeout"]
