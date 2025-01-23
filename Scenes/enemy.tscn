@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1n4q2tq81d30"]
+
+[ext_resource type="Texture2D" uid="uid://caqojhnkp5jy6" path="res://Images/icon.svg" id="2_i26q5"]
+
+[sub_resource type="GDScript" id="GDScript_ytjdo"]
+script/source = "extends CharacterBody2D
+
+@onready var playertwo: CharacterBody2D = $\"../playertwo\"
+@onready var playerone: Player = $\"../playerone\"
+var speed = 25
+
+func _physics_process(delta):
+	var direct = (playertwo.position - position).normalized()
+	velocity = direct * speed
+	look_at(playertwo.position)
+	move_and_slide()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hnjg3"]
+size = Vector2(24, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4jq8j"]
+radius = 53.6656
+
+[node name="Enemy" type="CharacterBody2D"]
+script = SubResource("GDScript_ytjdo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(328.5, 136.232)
+scale = Vector2(0.132812, 0.134325)
+texture = ExtResource("2_i26q5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(329, 137)
+shape = SubResource("RectangleShape2D_hnjg3")
+
+[node name="detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection"]
+position = Vector2(329, 136)
+shape = SubResource("CircleShape2D_4jq8j")
+
+[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]
