@@ -1,13 +1,22 @@
 extends Control
 
 @export var y_offset = 0
-var list_of_food = ["bread","crossaint","muffin","baguette","cupcake","cake","garlic bread","milk tea","cappucino"]
+var list_of_food = ["1x Bread","1x Cinnamon Roll"]
+var rng = randi_range(0,list_of_food.size()-1)
 
 func _ready() -> void:
-	$Panel/RichTextLabel.text= list_of_food[randi_range(0,list_of_food.size()-1)]	
+	$ColorRect/RichTextLabel.text= list_of_food[rng]
+	if rng == 0:
+		$ColorRect/RichTextLabel2.text = "Flour > Sink > Oven"
+		$ColorRect/RichTextLabel3.text = "[right]$10.00[/right]"
+	if rng == 1:
+		$ColorRect/RichTextLabel2.text = "Flour > Sink > Sugar > Oven"
+		$ColorRect/RichTextLabel3.text = "[right]$15.00[/right]"
+
+	
 
 func _physics_process(_delta: float) -> void:
 	position.y += y_offset
-	$Panel/ProgressBar.value -= .1
-	if $Panel/ProgressBar.value <= 0:
+	$ColorRect/ProgressBar.value -= .1
+	if $ColorRect/ProgressBar.value <= 0:
 		queue_free()

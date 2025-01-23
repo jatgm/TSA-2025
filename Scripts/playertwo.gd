@@ -13,5 +13,11 @@ func _physics_process(_delta): # happens 60 times a sec, underscore can represen
 	move_and_slide()
 	update_animation_parameters(input_direction)
 	
+	if not can_attack:
+		atk_time -= _delta
+		if atk_time <= 0:
+			can_attack = true
+	
 	if Input.is_action_just_pressed("player_two_interact"):
 		$Pivot/InteractionManager.initiate_interaction()
+		attack()

@@ -2,13 +2,19 @@ extends Area2D
 
 class_name InteractionManager
 
-var current_interaction : InteractionManager
+var current_interaction 
 
 func initiate_interaction() -> void:
 	if current_interaction != null:
-		current_interaction.recieve_interaction($"../../.") # gives the player
+		current_interaction.receive_interaction($"../../.") # gives the player
 
-func receive_interaction(interacter) -> void:
+func receive_interaction(_interacter) -> void:
+	pass # OVERWRITE THIS
+
+func hover() -> void:
+	pass
+	
+func unhover() -> void:
 	pass
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -20,9 +26,9 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		current_interaction = null
 
 func _on_area_entered(area: Area2D) -> void:
-	print("enttered")
 	current_interaction = area
-	pass # Replace with function body.
+	hover()
 
-func _on_area_exited(area: Area2D) -> void:
+func _on_area_exited(_area: Area2D) -> void:
 	current_interaction = null
+	unhover()

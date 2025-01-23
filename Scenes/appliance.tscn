@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc635cnjd78q1"]
+
+[ext_resource type="PackedScene" uid="uid://vrl4xv716d7p" path="res://Scenes/interaction_manager.tscn" id="1_2ni2p"]
+[ext_resource type="Script" path="res://Scripts/applianceinteraction.gd" id="2_db26p"]
+[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="3_65qss"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40kv2"]
+shader = ExtResource("3_65qss")
+shader_parameter/flash_color = Color(1, 1, 0, 1)
+shader_parameter/opacity = 0.0
+
+[node name="appliance" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 13.0
+offset_bottom = 12.0
+color = Color(1, 1, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_40kv2")
+
+[node name="InteractionManager" parent="." instance=ExtResource("1_2ni2p")]
+script = ExtResource("2_db26p")
+
+[editable path="InteractionManager"]

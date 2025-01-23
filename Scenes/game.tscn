@@ -1,28 +1,118 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmabkl5neyb3"]
+[gd_scene load_steps=28 format=3 uid="uid://cmabkl5neyb3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_fsq2d"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_30gcq"]
 [ext_resource type="PackedScene" uid="uid://ccsxyldn8rq54" path="res://Scenes/playerone.tscn" id="3_cnwn3"]
 [ext_resource type="Script" path="res://Scripts/playertwo.gd" id="3_ru1wl"]
 [ext_resource type="Texture2D" uid="uid://b82d0rdlonjqy" path="res://Images/char2walkingspritesheet.png" id="5_1v5s8"]
-[ext_resource type="PackedScene" uid="uid://bc635cnjd78q1" path="res://Scenes/stove.tscn" id="5_e1afk"]
-[ext_resource type="Texture2D" uid="uid://b8ayv4mchl75n" path="res://Images/dayandnighttilemap.png" id="7_b7hih"]
+[ext_resource type="PackedScene" uid="uid://bc635cnjd78q1" path="res://Scenes/appliance.tscn" id="5_e1afk"]
+[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="6_m7q2d"]
+[ext_resource type="Script" path="res://Scripts/flourstationinteraction.gd" id="7_knfir"]
+[ext_resource type="Script" path="res://Scenes/sinkinteraction.gd" id="7_mofti"]
+[ext_resource type="Texture2D" uid="uid://diry1xbepgsoi" path="res://Images/bakery.png" id="7_rllco"]
+[ext_resource type="FontFile" uid="uid://brmm5lbpeonae" path="res://Fonts/MONACO.TTF" id="7_tutk7"]
+[ext_resource type="Script" path="res://Scenes/oveninteraction.gd" id="9_iimqr"]
+[ext_resource type="Script" path="res://Scenes/submitinteraction.gd" id="10_6w7m0"]
+[ext_resource type="Script" path="res://Scenes/sugarinteraction.gd" id="10_pvgpl"]
+
+[sub_resource type="Animation" id="Animation_r20gu"]
+resource_name = "daytonight"
+length = 60.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0.980392, 1), Color(0.376471, 0.709804, 0.980392, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vrhue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0.980392, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s0bu0"]
+_data = {
+"RESET": SubResource("Animation_vrhue"),
+"daytonight": SubResource("Animation_r20gu")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ntf1k"]
+resource_local_to_scene = true
+shader = ExtResource("6_m7q2d")
+shader_parameter/flash_color = Color(1, 1, 1, 0.596078)
+shader_parameter/opacity = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ou40"]
+size = Vector2(30, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxpex"]
+size = Vector2(20, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0va4"]
+size = Vector2(21, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgw2h"]
+size = Vector2(19, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q67oc"]
+size = Vector2(25, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n573x"]
+size = Vector2(58.5317, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjsdq"]
+size = Vector2(9.45679, 158.54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4t27p"]
+size = Vector2(237, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0k5s"]
+size = Vector2(24, 90)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_fsq2d")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 1, 0.980392, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasModulate"]
+libraries = {
+"": SubResource("AnimationLibrary_s0bu0")
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3.5, 3.5)
 script = ExtResource("2_30gcq")
 
 [node name="playertwo" parent="." instance=ExtResource("3_cnwn3")]
+z_index = 1
 position = Vector2(-75, 10)
 script = ExtResource("3_ru1wl")
 
 [node name="Sprite2D" parent="playertwo" index="0"]
 texture = ExtResource("5_1v5s8")
 
+[node name="item" parent="playertwo/Pivot" index="0"]
+material = SubResource("ShaderMaterial_ntf1k")
+
 [node name="playerone" parent="." instance=ExtResource("3_cnwn3")]
+z_index = 1
 position = Vector2(58, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -37,34 +127,195 @@ offset_bottom = 338.0
 clip_contents = true
 layout_direction = 2
 layout_mode = 1
-offset_right = 1922.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -961.0
+offset_right = 961.0
 offset_bottom = 362.0
+grow_horizontal = 2
 theme_override_constants/separation = 140
 
-[node name="add ticket button" type="Button" parent="CanvasLayer"]
-offset_left = 120.0
-offset_top = 464.0
-offset_right = 205.0
-offset_bottom = 495.0
-text = "add ticket"
+[node name="timeremaining" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_right = 190.0
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("7_tutk7")
+theme_override_font_sizes/normal_font_size = 15
+text = "Time Remaining:"
+scroll_active = false
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -1
-offset_left = -521.0
-offset_top = -293.0
-offset_right = 562.0
-offset_bottom = 302.0
-color = Color(0.347817, 0.347817, 0.347817, 1)
+[node name="transitionmessage" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -532.0
+offset_right = 533.0
+offset_bottom = 105.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("7_tutk7")
+theme_override_font_sizes/normal_font_size = 30
+text = "It's night time... your store is now overrun with bacteria!
+Clean the kitchen for 20 seconds to move on!"
+scroll_active = false
 
-[node name="stove" parent="." instance=ExtResource("5_e1afk")]
-position = Vector2(-133, -87)
+[node name="controls" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -68.0
+offset_right = 280.0
+offset_bottom = 68.0
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("7_tutk7")
+theme_override_font_sizes/normal_font_size = 15
+text = "Controls
+Player One
+[WASD] - Move
+[E] - Interact/Attack
+Player Two
+[Arrow Keys] - Move
+[Right Shift] - Interact/Attack"
+scroll_active = false
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -1
-texture = ExtResource("7_b7hih")
-vframes = 2
+[node name="sink" parent="." instance=ExtResource("5_e1afk")]
+position = Vector2(-62, -66)
 
-[connection signal="pressed" from="CanvasLayer/add ticket button" to="." method="_on_button_pressed"]
+[node name="ColorRect" parent="sink" index="0"]
+offset_left = -8.0
+offset_top = -6.0
+offset_right = 10.0
+offset_bottom = 8.0
+
+[node name="InteractionManager" parent="sink" index="2"]
+script = ExtResource("7_mofti")
+
+[node name="InteractingRegion" parent="sink/InteractionManager" index="0"]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_6ou40")
+
+[node name="flourstation" parent="." instance=ExtResource("5_e1afk")]
+position = Vector2(-113, -10)
+
+[node name="ColorRect" parent="flourstation" index="0"]
+offset_left = 2.0
+offset_top = -4.0
+offset_right = 21.0
+offset_bottom = 30.0
+
+[node name="InteractionManager" parent="flourstation" index="2"]
+script = ExtResource("7_knfir")
+
+[node name="InteractingRegion" parent="flourstation/InteractionManager" index="0"]
+position = Vector2(11, 14)
+shape = SubResource("RectangleShape2D_mxpex")
+
+[node name="oven" parent="." instance=ExtResource("5_e1afk")]
+position = Vector2(54, -72)
+
+[node name="ColorRect" parent="oven" index="0"]
+offset_left = -2.0
+offset_top = -5.0
+offset_right = 19.0
+offset_bottom = 24.0
+
+[node name="InteractionManager" parent="oven" index="2"]
+script = ExtResource("9_iimqr")
+
+[node name="InteractingRegion" parent="oven/InteractionManager" index="0"]
+position = Vector2(8.5, 10)
+shape = SubResource("RectangleShape2D_v0va4")
+
+[node name="submit" parent="." instance=ExtResource("5_e1afk")]
+position = Vector2(-9, -6)
+
+[node name="ColorRect" parent="submit" index="0"]
+offset_left = -5.0
+offset_top = -3.0
+offset_right = 22.0
+offset_bottom = 14.0
+
+[node name="InteractionManager" parent="submit" index="2"]
+script = ExtResource("10_6w7m0")
+
+[node name="InteractingRegion" parent="submit/InteractionManager" index="0"]
+position = Vector2(8.5, 4.5)
+shape = SubResource("RectangleShape2D_tgw2h")
+
+[node name="sugar" parent="." instance=ExtResource("5_e1afk")]
+position = Vector2(7, 71)
+
+[node name="ColorRect" parent="sugar" index="0"]
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 14.0
+offset_bottom = 17.0
+
+[node name="InteractionManager" parent="sugar" index="2"]
+script = ExtResource("10_pvgpl")
+
+[node name="InteractingRegion" parent="sugar/InteractionManager" index="0"]
+position = Vector2(12, 5)
+shape = SubResource("RectangleShape2D_q67oc")
+
+[node name="background" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(1, 0)
+texture = ExtResource("7_rllco")
+metadata/_edit_lock_ = true
+
+[node name="walls" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
+position = Vector2(-69, -65)
+shape = SubResource("RectangleShape2D_n573x")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
+position = Vector2(61, -65)
+shape = SubResource("RectangleShape2D_n573x")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls"]
+position = Vector2(-108, 11)
+rotation = 0.186704
+shape = SubResource("RectangleShape2D_kjsdq")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls"]
+position = Vector2(104, 10)
+rotation = -0.16502
+shape = SubResource("RectangleShape2D_kjsdq")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="walls"]
+position = Vector2(-2.5, 93.5)
+shape = SubResource("RectangleShape2D_4t27p")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="walls"]
+position = Vector2(-1, 45)
+shape = SubResource("RectangleShape2D_p0k5s")
+
+[node name="TicketTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="submit" from="submit/InteractionManager" to="." method="_on_interaction_manager_submit"]
+[connection signal="timeout" from="TicketTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
 
 [editable path="playertwo"]
 [editable path="playertwo/Pivot/InteractionManager"]
+[editable path="sink"]
+[editable path="sink/InteractionManager"]
+[editable path="flourstation"]
+[editable path="flourstation/InteractionManager"]
+[editable path="oven"]
+[editable path="oven/InteractionManager"]
+[editable path="submit"]
+[editable path="submit/InteractionManager"]
+[editable path="sugar"]
+[editable path="sugar/InteractionManager"]
