@@ -22,4 +22,6 @@ material = SubResource("ShaderMaterial_40kv2")
 [node name="InteractionManager" parent="." instance=ExtResource("1_2ni2p")]
 script = ExtResource("2_db26p")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
 [editable path="InteractionManager"]

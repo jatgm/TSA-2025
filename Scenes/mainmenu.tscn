@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://mn4xw6ky7iay"]
+[gd_scene load_steps=5 format=3 uid="uid://mn4xw6ky7iay"]
 
 [ext_resource type="Texture2D" uid="uid://gcgla7i7aj23" path="res://Images/NewTitleScreen.png" id="1_5x2p5"]
 [ext_resource type="Script" path="res://mainmenu.gd" id="1_i5a51"]
 [ext_resource type="FontFile" uid="uid://brmm5lbpeonae" path="res://Fonts/MONACO.TTF" id="3_6mcyl"]
+[ext_resource type="AudioStream" uid="uid://cgf8k7ea4510p" path="res://audio/blipSelect.wav" id="4_hovto"]
 
 [node name="mainmenu" type="Node2D"]
 script = ExtResource("1_i5a51")
@@ -68,3 +69,6 @@ offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_5x2p5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hovto")

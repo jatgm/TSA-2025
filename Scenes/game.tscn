@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cmabkl5neyb3"]
+[gd_scene load_steps=35 format=3 uid="uid://cmabkl5neyb3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_fsq2d"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_30gcq"]
@@ -13,7 +13,28 @@
 [ext_resource type="FontFile" uid="uid://brmm5lbpeonae" path="res://Fonts/MONACO.TTF" id="7_tutk7"]
 [ext_resource type="Script" path="res://Scenes/oveninteraction.gd" id="9_iimqr"]
 [ext_resource type="Script" path="res://Scenes/submitinteraction.gd" id="10_6w7m0"]
+[ext_resource type="AudioStream" uid="uid://bv64qa0wm5vow" path="res://audio/audacity_sink.mp3" id="10_ho4b5"]
 [ext_resource type="Script" path="res://Scenes/sugarinteraction.gd" id="10_pvgpl"]
+[ext_resource type="AudioStream" uid="uid://ypj1uf18t6re" path="res://audio/audacity_dough.mp3" id="12_eoddf"]
+[ext_resource type="AudioStream" uid="uid://t7fk27ibm0y1" path="res://audio/ding.wav" id="14_o61v8"]
+[ext_resource type="AudioStream" uid="uid://butjsa6s534k2" path="res://audio/piano_muisic.wav" id="15_tdkyp"]
+[ext_resource type="AudioStream" uid="uid://cgf8k7ea4510p" path="res://audio/blipSelect.wav" id="16_bctoo"]
+[ext_resource type="AudioStream" uid="uid://creimf65eihq0" path="res://audio/battle_music.wav" id="20_k7c2w"]
+
+[sub_resource type="Animation" id="Animation_vrhue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0.980392, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_r20gu"]
 resource_name = "daytonight"
@@ -29,21 +50,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 0.980392, 1), Color(0.376471, 0.709804, 0.980392, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_vrhue"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 0.980392, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s0bu0"]
@@ -84,6 +90,9 @@ size = Vector2(237, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0k5s"]
 size = Vector2(24, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwrhl"]
+size = Vector2(36.9099, 6)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_fsq2d")
@@ -141,7 +150,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -22.0
-offset_right = 190.0
+offset_right = 322.0
 grow_vertical = 0
 theme_override_fonts/normal_font = ExtResource("7_tutk7")
 theme_override_font_sizes/normal_font_size = 15
@@ -160,7 +169,7 @@ grow_horizontal = 2
 theme_override_fonts/normal_font = ExtResource("7_tutk7")
 theme_override_font_sizes/normal_font_size = 30
 text = "It's night time... your store is now overrun with bacteria!
-Clean the kitchen for 20 seconds to move on!"
+Defeat all the bacteria in the kitchen to move on!"
 scroll_active = false
 
 [node name="controls" type="RichTextLabel" parent="CanvasLayer"]
@@ -198,6 +207,11 @@ script = ExtResource("7_mofti")
 position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_6ou40")
 
+[node name="AudioStreamPlayer2D" parent="sink" index="3"]
+stream = ExtResource("10_ho4b5")
+volume_db = -9.0
+bus = &"fx"
+
 [node name="flourstation" parent="." instance=ExtResource("5_e1afk")]
 position = Vector2(-113, -10)
 
@@ -213,6 +227,10 @@ script = ExtResource("7_knfir")
 [node name="InteractingRegion" parent="flourstation/InteractionManager" index="0"]
 position = Vector2(11, 14)
 shape = SubResource("RectangleShape2D_mxpex")
+
+[node name="AudioStreamPlayer2D" parent="flourstation" index="3"]
+stream = ExtResource("12_eoddf")
+bus = &"fx"
 
 [node name="oven" parent="." instance=ExtResource("5_e1afk")]
 position = Vector2(54, -72)
@@ -230,6 +248,10 @@ script = ExtResource("9_iimqr")
 position = Vector2(8.5, 10)
 shape = SubResource("RectangleShape2D_v0va4")
 
+[node name="AudioStreamPlayer2D" parent="oven" index="3"]
+stream = ExtResource("14_o61v8")
+bus = &"fx"
+
 [node name="submit" parent="." instance=ExtResource("5_e1afk")]
 position = Vector2(-9, -6)
 
@@ -245,6 +267,10 @@ script = ExtResource("10_6w7m0")
 [node name="InteractingRegion" parent="submit/InteractionManager" index="0"]
 position = Vector2(8.5, 4.5)
 shape = SubResource("RectangleShape2D_tgw2h")
+
+[node name="AudioStreamPlayer2D" parent="submit" index="3"]
+stream = ExtResource("16_bctoo")
+bus = &"fx"
 
 [node name="sugar" parent="." instance=ExtResource("5_e1afk")]
 position = Vector2(7, 71)
@@ -262,6 +288,10 @@ script = ExtResource("10_pvgpl")
 position = Vector2(12, 5)
 shape = SubResource("RectangleShape2D_q67oc")
 
+[node name="AudioStreamPlayer2D" parent="sugar" index="3"]
+stream = ExtResource("12_eoddf")
+bus = &"fx"
+
 [node name="background" type="Sprite2D" parent="."]
 z_index = -2
 position = Vector2(1, 0)
@@ -271,11 +301,19 @@ metadata/_edit_lock_ = true
 [node name="walls" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
-position = Vector2(-69, -65)
+position = Vector2(-71, -65)
+shape = SubResource("RectangleShape2D_n573x")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="walls"]
+position = Vector2(-75, -65)
+shape = SubResource("RectangleShape2D_n573x")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="walls"]
+position = Vector2(0, -100)
 shape = SubResource("RectangleShape2D_n573x")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
-position = Vector2(61, -65)
+position = Vector2(76, -66)
 shape = SubResource("RectangleShape2D_n573x")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="walls"]
@@ -296,12 +334,39 @@ shape = SubResource("RectangleShape2D_4t27p")
 position = Vector2(-1, 45)
 shape = SubResource("RectangleShape2D_p0k5s")
 
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="walls"]
+position = Vector2(48, -84)
+rotation = -1.95774
+shape = SubResource("RectangleShape2D_dwrhl")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="walls"]
+position = Vector2(-50, -84)
+rotation = -1.04967
+shape = SubResource("RectangleShape2D_dwrhl")
+
 [node name="TicketTimer" type="Timer" parent="."]
 wait_time = 4.0
 autostart = true
 
 [node name="GameTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="piano" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_tdkyp")
+bus = &"high pass filter"
+
+[node name="battle_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_k7c2w")
+volume_db = -8.407
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = -5
+offset_left = -354.0
+offset_top = -216.0
+offset_right = 378.0
+offset_bottom = 250.0
+color = Color(0, 0, 0, 1)
 
 [connection signal="submit" from="submit/InteractionManager" to="." method="_on_interaction_manager_submit"]
 [connection signal="timeout" from="TicketTimer" to="." method="_on_timer_timeout"]

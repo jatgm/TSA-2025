@@ -16,6 +16,7 @@ var can_attack = true
 
 func _ready():
 	health_bar.value = health
+	$AnimationPlayer.play("walking")
 	
 func _physics_process(_delta):
 	var closer_player
@@ -59,6 +60,7 @@ func take_damage(amount):
 		health = 0
 	health_bar.value = health
 	print("Enemy Health: ", health)
+	$AudioStreamPlayer.play()
 	
 	if health <= 0:
 		die()

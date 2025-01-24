@@ -29,14 +29,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -173.0
+offset_left = -169.0
 offset_top = -140.0
-offset_right = 173.0
+offset_right = 169.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/normal_font = ExtResource("2_5xche")
 theme_override_font_sizes/normal_font_size = 30
-text = "TO BE CONTINUED..."
+text = "TO BE CONTINUED!"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 z_index = -1
