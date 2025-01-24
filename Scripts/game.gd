@@ -40,7 +40,7 @@ func _on_timer_timeout() -> void:
 	$CanvasLayer/Control/tickets.add_child(ticket)
 	if fighting_stage && counter <= 10 && time_remaining != 0:
 		add_child(foe.instantiate())
-		counter += 1
+		counter += 1	
 
 func _on_game_timer_timeout() -> void:
 	if time_remaining > 0:

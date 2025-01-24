@@ -119,17 +119,17 @@ offset_bottom = 74.0
 grow_horizontal = 2
 script = ExtResource("4_ide8g")
 
-[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="." method="_on_second_item_pressed"]
-[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_second_item_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="." method="_on_third_item_pressed"]
-[connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="CanvasLayer" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="CanvasLayer" method="_on_third_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="CanvasLayer" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="." method="_on_first_item_pressed"]
-[connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="CanvasLayer" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="CanvasLayer" method="_on_first_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="CanvasLayer" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/Close" to="CanvasLayer/Panel/Close" method="_on_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="CanvasLayer2/Time" method="_on_timer_timeout"]

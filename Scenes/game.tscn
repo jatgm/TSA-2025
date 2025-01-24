@@ -17,8 +17,8 @@
 [ext_resource type="Script" path="res://Scenes/sugarinteraction.gd" id="10_pvgpl"]
 [ext_resource type="AudioStream" uid="uid://ypj1uf18t6re" path="res://audio/audacity_dough.mp3" id="12_eoddf"]
 [ext_resource type="AudioStream" uid="uid://t7fk27ibm0y1" path="res://audio/ding.wav" id="14_o61v8"]
-[ext_resource type="AudioStream" uid="uid://butjsa6s534k2" path="res://audio/piano_muisic.wav" id="15_tdkyp"]
 [ext_resource type="AudioStream" uid="uid://cgf8k7ea4510p" path="res://audio/blipSelect.wav" id="16_bctoo"]
+[ext_resource type="AudioStream" uid="uid://saqpfhfvgcdg" path="res://audio/relaxingpiano.mp3" id="19_yrlpw"]
 [ext_resource type="AudioStream" uid="uid://creimf65eihq0" path="res://audio/battle_music.wav" id="20_k7c2w"]
 
 [sub_resource type="Animation" id="Animation_vrhue"]
@@ -352,7 +352,7 @@ autostart = true
 autostart = true
 
 [node name="piano" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_tdkyp")
+stream = ExtResource("19_yrlpw")
 bus = &"high pass filter"
 
 [node name="battle_music" type="AudioStreamPlayer" parent="."]
