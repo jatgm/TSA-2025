@@ -1,18 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkexc7cf1e333"]
+[gd_scene load_steps=3 format=3 uid="uid://dqctfu3cn4vwa"]
 
-[ext_resource type="Script" path="res://Gold.gd" id="1_t076w"]
-[ext_resource type="Script" path="res://Close.gd" id="3_ifev1"]
-[ext_resource type="Script" path="res://time_Left.gd" id="4_ide8g"]
-[ext_resource type="Script" path="res://Buffs.gd" id="4_sn468"]
+[ext_resource type="Script" path="res://Buffs.gd" id="1_ve5t4"]
+[ext_resource type="Script" path="res://Close.gd" id="3_m28ib"]
 
 [node name="Node2D" type="Node2D"]
-visible = false
-script = ExtResource("4_sn468")
+script = ExtResource("1_ve5t4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_t076w")
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 anchors_preset = 8
@@ -100,30 +96,17 @@ offset_top = 22.0
 offset_right = 977.0
 offset_bottom = 75.0
 text = "CLOSE"
-script = ExtResource("3_ifev1")
+script = ExtResource("3_m28ib")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-
-[node name="Time" type="TextEdit" parent="CanvasLayer2"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -53.5
-offset_top = 32.0
-offset_right = 53.5
-offset_bottom = 74.0
-grow_horizontal = 2
-script = ExtResource("4_ide8g")
-
 [connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="." method="_on_second_item_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_second_item_pressed"]
-[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_button_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/SecondItem" to="CanvasLayer" method="_on_button_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="." method="_on_third_item_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="CanvasLayer" method="_on_third_item_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/ThirdItem" to="CanvasLayer" method="_on_button_pressed"]
@@ -132,4 +115,3 @@ script = ExtResource("4_ide8g")
 [connection signal="pressed" from="CanvasLayer/Panel/FirstItem" to="CanvasLayer" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Panel/Close" to="CanvasLayer/Panel/Close" method="_on_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer" to="CanvasLayer2/Time" method="_on_timer_timeout"]

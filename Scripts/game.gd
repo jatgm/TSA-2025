@@ -2,6 +2,9 @@ extends Node
 
 @onready var ticket = preload("res://Scenes/ticket.tscn")
 @onready var foe = preload("res://Scenes/foe.tscn")
+#Preloads shop
+@onready var shop_scene = preload("res://Scenes/shop.tscn")
+var shop_instance = null
 
 
 var time_remaining = 60
@@ -25,15 +28,27 @@ func _on_interaction_manager_submit(type: Variant) -> void:
 			child.queue_free()
 			break
 
+#Opens the shop
+func open_shop():
+	if shop_instance != null:
+		return
+	shop_instance = shop_scene.instantiate()
+	$CanvasLayer.add_child(shop_instance)
+	$CanvasLayer/Control/tickets.visible = false
+	$CanvasLayer/controls.visible = false
+	$CanvasLayer/timeremaining.visible = false
 
 func transition():
 	$piano.stream_paused = true
 	$battle_music.play()
 	$CanvasLayer/Control/tickets.visible = false
+	$CanvasLayer/controls.visible = true
+	$CanvasLayer/timeremaining.visible = true
 	$CanvasLayer/transitionmessage.visible = true
 	time_remaining = 20
 	
 	fighting_stage = true
+
 	
 func _on_timer_timeout() -> void:
 	var ticket = ticket.instantiate()
@@ -48,7 +63,11 @@ func _on_game_timer_timeout() -> void:
 	
 	if time_remaining <= 0 && fighting_stage == true && get_tree().get_nodes_in_group("foes").size()==0:
 		get_tree().change_scene_to_file("res://Scenes/endoflevel.tscn")
-	if time_remaining <= 0 && fighting_stage == false:
+	#Added open shop
+	if time_remaining <= 0:
+		open_shop()
+	#ask jason about this cuz i dont know
+	if time_remaining <= 0 && fighting_stage == false && Global.shop_open == false: #Added this so it only transitions if shop is closed
 		transition() #will continiously run this
 	
 	

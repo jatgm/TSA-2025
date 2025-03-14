@@ -6,13 +6,8 @@ class_name Player
 @export var starting_direction : Vector2 = Vector2(0, 1)
 @onready var state_machine = $AnimationTree.get("parameters/playback")
 
-var health = 100
-var atk_dmg = 10
-var atk_cooldown = 0.5
 var atk_time = 0.0
 var can_attack = true
-var crit_dmg = 5
-var crit_rate = 0.2
 
 
 enum {
@@ -91,22 +86,22 @@ func attack():
 	if not can_attack:
 		return
 	can_attack = false
-	atk_time = atk_cooldown
+	atk_time = Global.atk_cooldown
 	
 	var crit_roll = randf()
-	if crit_roll <= crit_rate:
-		atk_dmg += crit_dmg
+	if crit_roll <= Global.crit_rate:
+		Global.atk_dmg += Global.crit_dmg
 	
 	for body in $AttackRange.get_overlapping_bodies():
 		if body.has_method("take_damage"):
-			body.take_damage(atk_dmg)
-	atk_dmg = 10
+			body.take_damage(Global.atk_dmg)
+	Global.atk_dmg = 10
 
 func take_damage(amount):
-	health -= amount
-	print("PLayer Health: ", health)
+	Global.health -= amount
+	print("PLayer Health: ", Global.health)
 	
-	if health <= 0:
+	if Global.health <= 0:
 		die()
 
 func die():
