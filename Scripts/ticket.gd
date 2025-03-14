@@ -1,7 +1,7 @@
 extends Control
 
 @export var y_offset = 0
-var list_of_food = ["1x Bread","1x Cinnamon Roll"]
+var list_of_food = ["1x Bread","1x Cinnamon Roll", "1x Croissant"]
 var rng = randi_range(0,list_of_food.size()-1)
 
 func _ready() -> void:
@@ -12,7 +12,9 @@ func _ready() -> void:
 	if rng == 1:
 		$ColorRect/RichTextLabel2.text = "Flour > Sink > Sugar > Oven"
 		$ColorRect/RichTextLabel3.text = "[right]$15.00[/right]"
-
+	if rng == 2:
+		$ColorRect/RichTextLabel2.text = "Flour > Sink > Butter > Oven"
+		$ColorRect/RichTextLabel3.text = "[right]$20.00[/right]"
 	
 
 func _physics_process(_delta: float) -> void:

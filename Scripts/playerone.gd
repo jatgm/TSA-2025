@@ -18,6 +18,12 @@ enum {
 	HOLDING_SUGARDOUGH,
 	HOLDING_CINNAMON_ROLL,
 	HOLDING_BAGUETTE,
+	#
+	HOLDING_DOUGH_BUTTER,
+	HOLDING_CROISSANT,
+	HOLDING_DOUGH_BUTTER_SUGAR,
+	HOLDING_MIXED_DOUGH_BUTTER_SUGAR,
+	HOLDING_CAKE
 }
 var state = EMPTY
 
@@ -49,8 +55,26 @@ func advance(step):
 		HOLDING_BAGUETTE:
 			$Pivot/item.texture = load("res://Images/baguettespritesheet.png")
 		HOLDING_SUGARDOUGH:
-			$Pivot/item.material.set_shader_parameter("opacity", .8)
-			
+			$Pivot/item.material.set_shader_parameter("flash_color", Color(255,255,255))
+			$Pivot/item.material.set_shader_parameter("opacity", .001)
+		
+		HOLDING_DOUGH_BUTTER:
+			$Pivot/item.material.set_shader_parameter("flash_color", Color(255,255,0))
+			$Pivot/item.material.set_shader_parameter("opacity", .001)
+
+		HOLDING_CROISSANT:
+			$Pivot/item.texture = load("res://Images/croissant.png")
+			$Pivot/item.material.set_shader_parameter("opacity", 0)
+			$Pivot/item/AnimationPlayer.play("RESET")
+		
+		HOLDING_DOUGH_BUTTER_SUGAR:
+			$Pivot/item.texture = load("res://Images/cakepremixed.png")
+			$Pivot/item.material.set_shader_parameter("opacity", 0)
+			$Pivot/item/AnimationPlayer.play("RESET")
+		HOLDING_MIXED_DOUGH_BUTTER_SUGAR:
+			$Pivot/item.texture = load("res://Images/cakepostmixed.png")
+			$Pivot/item.material.set_shader_parameter("opacity", 0)
+			$Pivot/item/AnimationPlayer.play("RESET")
 		
 		
 func _physics_process(_delta): # happens 60 times a sec, underscore can represent unused variable

@@ -27,6 +27,9 @@ func _on_interaction_manager_submit(type: Variant) -> void:
 		if child.rng == 1 && type == 5:
 			child.queue_free()
 			break
+		if child.rng == 2 && type == 8:
+			child.queue_free()
+			break
 
 #Opens the shop
 func open_shop():
