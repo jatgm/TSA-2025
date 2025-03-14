@@ -79,6 +79,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3l43q"]
 size = Vector2(22, 22)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ycyfd"]
+radius = 19.0
+
 [sub_resource type="Animation" id="Animation_2t7kx"]
 length = 0.001
 tracks/0/type = "value"
@@ -518,9 +521,6 @@ states/walk/position = Vector2(393.55, 100.376)
 transitions = ["walk", "idle", SubResource("AnimationNodeStateMachineTransition_5hwv1"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_gisdm")]
 graph_offset = Vector2(-50.9499, 15.5099)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ycyfd"]
-radius = 29.0172
-
 [node name="playerone" type="CharacterBody2D"]
 collision_layer = 2
 platform_floor_layers = 4294967294
@@ -556,6 +556,12 @@ libraries = {
 position = Vector2(0, 17)
 shape = SubResource("RectangleShape2D_3l43q")
 
+[node name="AttackRange" type="Area2D" parent="Pivot"]
+
+[node name="Range" type="CollisionShape2D" parent="Pivot/AttackRange"]
+position = Vector2(0, 26)
+shape = SubResource("CircleShape2D_ycyfd")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_cubb2")
@@ -566,10 +572,5 @@ tree_root = SubResource("AnimationNodeStateMachine_oub16")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(-0.00454134, 0.925532)
 parameters/walk/blend_position = Vector2(-0.0683031, 0.515419)
-
-[node name="AttackRange" type="Area2D" parent="."]
-
-[node name="Range" type="CollisionShape2D" parent="AttackRange"]
-shape = SubResource("CircleShape2D_ycyfd")
 
 [editable path="Pivot/InteractionManager"]

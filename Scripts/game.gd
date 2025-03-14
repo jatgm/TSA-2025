@@ -57,15 +57,21 @@ func _on_timer_timeout() -> void:
 		add_child(foe.instantiate())
 		counter += 1	
 
+func _process(delta: float) -> void:
+	if Input.is_physical_key_pressed(KEY_H):
+		get_tree().change_scene_to_file("res://Scenes/LEVELTWO.tscn")
+
+
 func _on_game_timer_timeout() -> void:
 	if time_remaining > 0:
 		time_remaining -=1
 	
 	if time_remaining <= 0 && fighting_stage == true && get_tree().get_nodes_in_group("foes").size()==0:
-		get_tree().change_scene_to_file("res://Scenes/endoflevel.tscn")
+		get_tree().change_scene_to_file("res://Scenes/LEVELTWO.tscn")
 	#Added open shop
 	if time_remaining <= 0:
 		open_shop()
+		print("test")
 	#ask jason about this cuz i dont know
 	if time_remaining <= 0 && fighting_stage == false && Global.shop_open == false: #Added this so it only transitions if shop is closed
 		transition() #will continiously run this

@@ -92,7 +92,7 @@ func attack():
 	if crit_roll <= Global.crit_rate:
 		Global.atk_dmg += Global.crit_dmg
 	
-	for body in $AttackRange.get_overlapping_bodies():
+	for body in $Pivot/AttackRange.get_overlapping_bodies():
 		if body.has_method("take_damage"):
 			body.take_damage(Global.atk_dmg)
 	Global.atk_dmg = 10

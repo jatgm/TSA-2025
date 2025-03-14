@@ -1,25 +1,25 @@
-[gd_scene load_steps=35 format=3 uid="uid://cmabkl5neyb3"]
+[gd_scene load_steps=38 format=3 uid="uid://d1leoiyxpu68i"]
 
-[ext_resource type="Script" path="res://Scripts/game.gd" id="1_fsq2d"]
-[ext_resource type="Script" path="res://camera_2d.gd" id="2_30gcq"]
-[ext_resource type="PackedScene" uid="uid://ccsxyldn8rq54" path="res://Scenes/playerone.tscn" id="3_cnwn3"]
-[ext_resource type="Script" path="res://Scripts/playertwo.gd" id="3_ru1wl"]
-[ext_resource type="Texture2D" uid="uid://b82d0rdlonjqy" path="res://Images/char2walkingspritesheet.png" id="5_1v5s8"]
-[ext_resource type="PackedScene" uid="uid://bc635cnjd78q1" path="res://Scenes/appliance.tscn" id="5_e1afk"]
-[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="6_m7q2d"]
-[ext_resource type="Script" path="res://Scripts/flourstationinteraction.gd" id="7_knfir"]
-[ext_resource type="Script" path="res://Scenes/sinkinteraction.gd" id="7_mofti"]
-[ext_resource type="Texture2D" uid="uid://diry1xbepgsoi" path="res://Images/bakery.png" id="7_rllco"]
-[ext_resource type="FontFile" uid="uid://brmm5lbpeonae" path="res://Fonts/MONACO.TTF" id="7_tutk7"]
-[ext_resource type="Script" path="res://Scenes/oveninteraction.gd" id="9_iimqr"]
-[ext_resource type="Script" path="res://Scenes/submitinteraction.gd" id="10_6w7m0"]
-[ext_resource type="AudioStream" uid="uid://bv64qa0wm5vow" path="res://audio/audacity_sink.mp3" id="10_ho4b5"]
-[ext_resource type="Script" path="res://Scenes/sugarinteraction.gd" id="10_pvgpl"]
-[ext_resource type="AudioStream" uid="uid://ypj1uf18t6re" path="res://audio/audacity_dough.mp3" id="12_eoddf"]
-[ext_resource type="AudioStream" uid="uid://t7fk27ibm0y1" path="res://audio/ding.wav" id="14_o61v8"]
-[ext_resource type="AudioStream" uid="uid://cgf8k7ea4510p" path="res://audio/blipSelect.wav" id="16_bctoo"]
-[ext_resource type="AudioStream" uid="uid://saqpfhfvgcdg" path="res://audio/relaxingpiano.mp3" id="19_yrlpw"]
-[ext_resource type="AudioStream" uid="uid://creimf65eihq0" path="res://audio/battle_music.wav" id="20_k7c2w"]
+[ext_resource type="Script" path="res://Scenes/leveltwo.gd" id="1_ws3xb"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="2_jgivc"]
+[ext_resource type="PackedScene" uid="uid://ccsxyldn8rq54" path="res://Scenes/playerone.tscn" id="3_jphki"]
+[ext_resource type="Script" path="res://Scripts/playertwo.gd" id="4_18c2d"]
+[ext_resource type="Texture2D" uid="uid://b82d0rdlonjqy" path="res://Images/char2walkingspritesheet.png" id="5_b7dcl"]
+[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="6_t35w5"]
+[ext_resource type="FontFile" uid="uid://brmm5lbpeonae" path="res://Fonts/MONACO.TTF" id="7_nqdgr"]
+[ext_resource type="PackedScene" uid="uid://bc635cnjd78q1" path="res://Scenes/appliance.tscn" id="8_6ebtt"]
+[ext_resource type="Script" path="res://Scenes/sinkinteraction.gd" id="9_4qnlj"]
+[ext_resource type="AudioStream" uid="uid://bv64qa0wm5vow" path="res://audio/audacity_sink.mp3" id="10_kng84"]
+[ext_resource type="Script" path="res://Scripts/flourstationinteraction.gd" id="11_mc3i0"]
+[ext_resource type="AudioStream" uid="uid://ypj1uf18t6re" path="res://audio/audacity_dough.mp3" id="12_05y53"]
+[ext_resource type="Script" path="res://Scenes/oveninteraction.gd" id="13_cr0l7"]
+[ext_resource type="AudioStream" uid="uid://t7fk27ibm0y1" path="res://audio/ding.wav" id="14_sfydp"]
+[ext_resource type="Script" path="res://Scenes/submitinteraction.gd" id="15_hw7bd"]
+[ext_resource type="AudioStream" uid="uid://cgf8k7ea4510p" path="res://audio/blipSelect.wav" id="16_o7l6c"]
+[ext_resource type="Script" path="res://Scenes/sugarinteraction.gd" id="17_31e50"]
+[ext_resource type="Texture2D" uid="uid://diry1xbepgsoi" path="res://Images/bakery.png" id="18_71oyx"]
+[ext_resource type="AudioStream" uid="uid://saqpfhfvgcdg" path="res://audio/relaxingpiano.mp3" id="19_t7ras"]
+[ext_resource type="AudioStream" uid="uid://creimf65eihq0" path="res://audio/battle_music.wav" id="20_mdddx"]
 
 [sub_resource type="Animation" id="Animation_vrhue"]
 length = 0.001
@@ -60,7 +60,7 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ntf1k"]
 resource_local_to_scene = true
-shader = ExtResource("6_m7q2d")
+shader = ExtResource("6_t35w5")
 shader_parameter/flash_color = Color(1, 1, 1, 0.596078)
 shader_parameter/opacity = 0.0
 
@@ -94,8 +94,21 @@ size = Vector2(24, 90)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwrhl"]
 size = Vector2(36.9099, 6)
 
+[sub_resource type="Animation" id="Animation_42gns"]
+resource_name = "fade"
+length = 5.0
+
+[sub_resource type="Animation" id="Animation_fpf2e"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vjnlm"]
+_data = {
+"RESET": SubResource("Animation_fpf2e"),
+"fade": SubResource("Animation_42gns")
+}
+
 [node name="Game" type="Node"]
-script = ExtResource("1_fsq2d")
+script = ExtResource("1_ws3xb")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(1, 1, 0.980392, 1)
@@ -107,20 +120,20 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3.5, 3.5)
-script = ExtResource("2_30gcq")
+script = ExtResource("2_jgivc")
 
-[node name="playertwo" parent="." instance=ExtResource("3_cnwn3")]
+[node name="playertwo" parent="." instance=ExtResource("3_jphki")]
 z_index = 1
 position = Vector2(58, 4)
-script = ExtResource("3_ru1wl")
+script = ExtResource("4_18c2d")
 
 [node name="Sprite2D" parent="playertwo" index="0"]
-texture = ExtResource("5_1v5s8")
+texture = ExtResource("5_b7dcl")
 
 [node name="item" parent="playertwo/Pivot" index="0"]
 material = SubResource("ShaderMaterial_ntf1k")
 
-[node name="playerone" parent="." instance=ExtResource("3_cnwn3")]
+[node name="playerone" parent="." instance=ExtResource("3_jphki")]
 z_index = 1
 position = Vector2(-58, 7)
 
@@ -152,7 +165,7 @@ anchor_bottom = 1.0
 offset_top = -22.0
 offset_right = 322.0
 grow_vertical = 0
-theme_override_fonts/normal_font = ExtResource("7_tutk7")
+theme_override_fonts/normal_font = ExtResource("7_nqdgr")
 theme_override_font_sizes/normal_font_size = 15
 text = "Time Remaining:"
 scroll_active = false
@@ -166,7 +179,7 @@ offset_left = -532.0
 offset_right = 533.0
 offset_bottom = 105.0
 grow_horizontal = 2
-theme_override_fonts/normal_font = ExtResource("7_tutk7")
+theme_override_fonts/normal_font = ExtResource("7_nqdgr")
 theme_override_font_sizes/normal_font_size = 30
 text = "It's night time... your store is now overrun with bacteria!
 Defeat all the bacteria in the kitchen to move on!"
@@ -180,7 +193,7 @@ offset_top = -68.0
 offset_right = 280.0
 offset_bottom = 68.0
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("7_tutk7")
+theme_override_fonts/normal_font = ExtResource("7_nqdgr")
 theme_override_font_sizes/normal_font_size = 15
 text = "Controls
 Player One
@@ -191,7 +204,7 @@ Player Two
 [Right Shift] - Interact/Attack"
 scroll_active = false
 
-[node name="sink" parent="." instance=ExtResource("5_e1afk")]
+[node name="sink" parent="." instance=ExtResource("8_6ebtt")]
 position = Vector2(-62, -66)
 
 [node name="ColorRect" parent="sink" index="0"]
@@ -201,18 +214,18 @@ offset_right = 10.0
 offset_bottom = 8.0
 
 [node name="InteractionManager" parent="sink" index="2"]
-script = ExtResource("7_mofti")
+script = ExtResource("9_4qnlj")
 
 [node name="InteractingRegion" parent="sink/InteractionManager" index="0"]
 position = Vector2(1, -0.5)
 shape = SubResource("RectangleShape2D_6ou40")
 
 [node name="AudioStreamPlayer2D" parent="sink" index="3"]
-stream = ExtResource("10_ho4b5")
+stream = ExtResource("10_kng84")
 volume_db = -9.0
 bus = &"fx"
 
-[node name="flourstation" parent="." instance=ExtResource("5_e1afk")]
+[node name="flourstation" parent="." instance=ExtResource("8_6ebtt")]
 position = Vector2(-113, -10)
 
 [node name="ColorRect" parent="flourstation" index="0"]
@@ -222,17 +235,17 @@ offset_right = 21.0
 offset_bottom = 30.0
 
 [node name="InteractionManager" parent="flourstation" index="2"]
-script = ExtResource("7_knfir")
+script = ExtResource("11_mc3i0")
 
 [node name="InteractingRegion" parent="flourstation/InteractionManager" index="0"]
 position = Vector2(11, 14)
 shape = SubResource("RectangleShape2D_mxpex")
 
 [node name="AudioStreamPlayer2D" parent="flourstation" index="3"]
-stream = ExtResource("12_eoddf")
+stream = ExtResource("12_05y53")
 bus = &"fx"
 
-[node name="oven" parent="." instance=ExtResource("5_e1afk")]
+[node name="oven" parent="." instance=ExtResource("8_6ebtt")]
 position = Vector2(54, -72)
 
 [node name="ColorRect" parent="oven" index="0"]
@@ -242,17 +255,17 @@ offset_right = 19.0
 offset_bottom = 24.0
 
 [node name="InteractionManager" parent="oven" index="2"]
-script = ExtResource("9_iimqr")
+script = ExtResource("13_cr0l7")
 
 [node name="InteractingRegion" parent="oven/InteractionManager" index="0"]
 position = Vector2(8.5, 10)
 shape = SubResource("RectangleShape2D_v0va4")
 
 [node name="AudioStreamPlayer2D" parent="oven" index="3"]
-stream = ExtResource("14_o61v8")
+stream = ExtResource("14_sfydp")
 bus = &"fx"
 
-[node name="submit" parent="." instance=ExtResource("5_e1afk")]
+[node name="submit" parent="." instance=ExtResource("8_6ebtt")]
 position = Vector2(-9, -6)
 
 [node name="ColorRect" parent="submit" index="0"]
@@ -262,17 +275,17 @@ offset_right = 22.0
 offset_bottom = 14.0
 
 [node name="InteractionManager" parent="submit" index="2"]
-script = ExtResource("10_6w7m0")
+script = ExtResource("15_hw7bd")
 
 [node name="InteractingRegion" parent="submit/InteractionManager" index="0"]
 position = Vector2(8.5, 4.5)
 shape = SubResource("RectangleShape2D_tgw2h")
 
 [node name="AudioStreamPlayer2D" parent="submit" index="3"]
-stream = ExtResource("16_bctoo")
+stream = ExtResource("16_o7l6c")
 bus = &"fx"
 
-[node name="sugar" parent="." instance=ExtResource("5_e1afk")]
+[node name="sugar" parent="." instance=ExtResource("8_6ebtt")]
 position = Vector2(7, 71)
 
 [node name="ColorRect" parent="sugar" index="0"]
@@ -282,20 +295,20 @@ offset_right = 14.0
 offset_bottom = 17.0
 
 [node name="InteractionManager" parent="sugar" index="2"]
-script = ExtResource("10_pvgpl")
+script = ExtResource("17_31e50")
 
 [node name="InteractingRegion" parent="sugar/InteractionManager" index="0"]
 position = Vector2(12, 5)
 shape = SubResource("RectangleShape2D_q67oc")
 
 [node name="AudioStreamPlayer2D" parent="sugar" index="3"]
-stream = ExtResource("12_eoddf")
+stream = ExtResource("12_05y53")
 bus = &"fx"
 
 [node name="background" type="Sprite2D" parent="."]
 z_index = -2
 position = Vector2(1, 0)
-texture = ExtResource("7_rllco")
+texture = ExtResource("18_71oyx")
 metadata/_edit_lock_ = true
 
 [node name="walls" type="StaticBody2D" parent="."]
@@ -352,11 +365,11 @@ autostart = true
 autostart = true
 
 [node name="piano" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("19_yrlpw")
+stream = ExtResource("19_t7ras")
 bus = &"high pass filter"
 
 [node name="battle_music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("20_k7c2w")
+stream = ExtResource("20_mdddx")
 volume_db = -8.407
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -366,6 +379,27 @@ offset_top = -216.0
 offset_right = 378.0
 offset_bottom = 250.0
 color = Color(0.498039, 0.666667, 0.298039, 1)
+
+[node name="DayTwoLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -342.0
+offset_top = -83.0
+offset_right = 342.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("7_nqdgr")
+theme_override_font_sizes/normal_font_size = 125
+text = "LEVEL TWO"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DayTwoLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_vjnlm")
+}
 
 [connection signal="submit" from="submit/InteractionManager" to="." method="_on_interaction_manager_submit"]
 [connection signal="timeout" from="TicketTimer" to="." method="_on_timer_timeout"]

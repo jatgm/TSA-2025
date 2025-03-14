@@ -1,12 +1,14 @@
 extends Node
 
 var buff_array = ["ATK Buff", "ATK SP Buff", "CRIT DMG Buff", "CRIT RATE Buff"]
+var icon_array = [preload("res://Images/AtkSymbolIcon.png"),preload("res://Images/AtkSpeedIcon.png"),preload("res://Images/CritDmgIcon.png"),preload("res://Images/CritRateIcon.png")]
+var rng = [0,1,2,3]
 var total_items = 3
 var random_items = []
 
-@onready var first_text: TextEdit = $CanvasLayer/Panel/FirstItem/FirstText
-@onready var second_text: TextEdit = $CanvasLayer/Panel/SecondItem/SecondText
-@onready var third_text: TextEdit = $CanvasLayer/Panel/ThirdItem/ThirdText
+@onready var first_text: RichTextLabel = $CanvasLayer/Panel/FirstItem/RichTextLabel
+@onready var second_text: RichTextLabel = $CanvasLayer/Panel/SecondItem/RichTextLabel
+@onready var third_text: RichTextLabel = $CanvasLayer/Panel/ThirdItem/RichTextLabel
 
 @onready var first_item: Button = $CanvasLayer/Panel/FirstItem
 @onready var second_item: Button = $CanvasLayer/Panel/SecondItem
@@ -14,13 +16,18 @@ var random_items = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$CanvasLayer/Panel/TextEdit.text = str(Global.gold)
+	$CanvasLayer/Panel/RichTextLabel.text = str(Global.gold)
 	randomize()
-	buff_array.shuffle()
-	random_items = buff_array.slice(0, total_items)
-	first_text.text = random_items[0] + ": 100 Gold"
-	second_text.text = random_items[1] + ": 100 Gold"
-	third_text.text = random_items[2] + ": 100 Gold"
+	rng.shuffle()
+	
+	first_text.text = buff_array[rng[0]] + ": 100 Gold"
+	first_item.icon = icon_array[rng[0]]
+	
+	second_text.text = buff_array[rng[1]] + ": 100 Gold"
+	second_item.icon = icon_array[rng[1]]
+	
+	third_text.text = buff_array[rng[2]] + ": 100 Gold"
+	third_item.icon = icon_array[rng[2]]
 	
 	print("Random Elements: ", random_items)	
 
@@ -37,7 +44,8 @@ func apply_buff(index: int) -> void:
 			Global.atk_dmg += 5
 		"ATK SP Buff":
 			print("Your ATK SP has increased")
-			Global.atk_cooldown -= 0.2
+			if Global.atk_cooldown-0.2>=0:
+				Global.atk_cooldown -= 0.2
 		"CRIT DMG Buff":
 			print("Your CRIT DMG has increased")
 			Global.crit_dmg += 5
@@ -53,7 +61,7 @@ func _on_first_item_pressed() -> void:
 		Global.first_but = false
 		if Global.gold < 0:
 			Global.gold = 0
-		$CanvasLayer/Panel/TextEdit.text = str(Global.gold)
+		$CanvasLayer/Panel/RichTextLabel.text = str(Global.gold)
 		apply_buff(0)
 	
 func _on_second_item_pressed() -> void:
@@ -63,7 +71,7 @@ func _on_second_item_pressed() -> void:
 		Global.second_but = false
 		if Global.gold < 0:
 			Global.gold = 0
-		$CanvasLayer/Panel/TextEdit.text = str(Global.gold)
+		$CanvasLayer/Panel/RichTextLabel.text = str(Global.gold)
 		apply_buff(1)
 
 func _on_third_item_pressed() -> void:
@@ -73,5 +81,5 @@ func _on_third_item_pressed() -> void:
 		Global.third_but = false
 		if Global.gold < 0:
 			Global.gold = 0
-		$CanvasLayer/Panel/TextEdit.text = str(Global.gold)
+		$CanvasLayer/Panel/RichTextLabel.text = str(Global.gold)
 		apply_buff(1)
