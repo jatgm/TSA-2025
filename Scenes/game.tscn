@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cmabkl5neyb3"]
+[gd_scene load_steps=36 format=3 uid="uid://cmabkl5neyb3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_fsq2d"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_30gcq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/playertwo.gd" id="3_ru1wl"]
 [ext_resource type="Texture2D" uid="uid://b82d0rdlonjqy" path="res://Images/char2walkingspritesheet.png" id="5_1v5s8"]
 [ext_resource type="PackedScene" uid="uid://bc635cnjd78q1" path="res://Scenes/appliance.tscn" id="5_e1afk"]
+[ext_resource type="Texture2D" uid="uid://cse567bnw0du4" path="res://Images/char2attackspritesheet.png" id="6_0qgvl"]
 [ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="6_m7q2d"]
 [ext_resource type="Script" path="res://Scripts/flourstationinteraction.gd" id="7_knfir"]
 [ext_resource type="Script" path="res://Scenes/sinkinteraction.gd" id="7_mofti"]
@@ -117,8 +118,14 @@ script = ExtResource("3_ru1wl")
 [node name="Sprite2D" parent="playertwo" index="0"]
 texture = ExtResource("5_1v5s8")
 
+[node name="attackSprite" parent="playertwo" index="1"]
+texture = ExtResource("6_0qgvl")
+
 [node name="item" parent="playertwo/Pivot" index="0"]
 material = SubResource("ShaderMaterial_ntf1k")
+
+[node name="AnimationTree" parent="playertwo" index="5"]
+parameters/attack/blend_position = Vector2(-0.998126, 0.0212766)
 
 [node name="playerone" parent="." instance=ExtResource("3_cnwn3")]
 z_index = 1

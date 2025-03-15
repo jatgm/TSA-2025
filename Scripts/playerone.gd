@@ -8,6 +8,7 @@ class_name Player
 
 var atk_time = 0.0
 var can_attack = true
+var is_attacking = false
 
 
 enum {
@@ -75,7 +76,10 @@ func advance(step):
 			$Pivot/item.texture = load("res://Images/cakepostmixed.png")
 			$Pivot/item.material.set_shader_parameter("opacity", 0)
 			$Pivot/item/AnimationPlayer.play("RESET")
-		
+		HOLDING_CAKE:
+			$Pivot/item.texture = load("res://Images/cake.png")
+			$Pivot/item.material.set_shader_parameter("opacity", 0)
+			$Pivot/item/AnimationPlayer.play("RESET")
 		
 func _physics_process(_delta): # happens 60 times a sec, underscore can represent unused variable
 
@@ -99,14 +103,23 @@ func _physics_process(_delta): # happens 60 times a sec, underscore can represen
 		attack()
 
 func update_animation_parameters(move_input : Vector2):
-	if move_input != Vector2.ZERO:
-		state_machine.travel("walk")
-		$AnimationTree.set("parameters/walk/blend_position", move_input)
-		$AnimationTree.set("parameters/idle/blend_position", move_input)
+	if is_attacking:
+		state_machine.travel("attack",)
+		$AnimationTree.set("parameters/attack/blend_position", move_input)
+
 	else:
-		state_machine.travel("idle")
+		if move_input != Vector2.ZERO:
+			state_machine.travel("walk")
+			$AnimationTree.set("parameters/walk/blend_position", move_input)
+			$AnimationTree.set("parameters/idle/blend_position", move_input)
+			$AnimationTree.set("parameters/attack/blend_position", move_input)
+		else:
+			state_machine.travel("idle")
 
 func attack():
+	is_attacking = true
+	$Timer.start(0.5)
+	
 	if not can_attack:
 		return
 	can_attack = false
@@ -131,5 +144,6 @@ func take_damage(amount):
 func die():
 	print("Player died")
 	
-		
-	
+
+func _on_timer_timeout() -> void:
+	is_attacking = false

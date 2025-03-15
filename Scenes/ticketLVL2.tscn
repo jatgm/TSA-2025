@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbf0oait5ojnt"]
+
+[ext_resource type="Script" path="res://Scripts/ticket.gd" id="1_ud4by"]
+[ext_resource type="FontFile" uid="uid://brmm5lbpeonae" path="res://Fonts/MONACO.TTF" id="2_dpktk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acepk"]
+bg_color = Color(0, 1, 0.294118, 0.639216)
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="Theme" id="Theme_dnjw3"]
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_acepk")
+
+[node name="ticket" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 137.0
+offset_bottom = 168.0
+script = ExtResource("1_ud4by")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 187.0
+color = Color(1, 1, 1, 0.419608)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 19.0
+offset_right = 131.0
+offset_bottom = 84.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_dpktk")
+theme_override_font_sizes/normal_font_size = 15
+text = "1x Cinnamon Roll
+"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 89.0
+offset_right = 131.0
+offset_bottom = 163.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_dpktk")
+theme_override_font_sizes/normal_font_size = 15
+text = "Flour > Sink > Sugar > Oven"
+scroll_active = false
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 164.0
+offset_right = 131.0
+offset_bottom = 183.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_dpktk")
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "[right]$15.00[/right]"
+scroll_active = false
+
+[node name="ProgressBar" type="ProgressBar" parent="ColorRect"]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 17.0
+theme = SubResource("Theme_dnjw3")
+value = 100.0
+show_percentage = false

@@ -7,9 +7,8 @@ extends Node
 var shop_instance = null
 
 
-var time_remaining = 60
+var time_remaining = 1
 var counter = 0
-var fighting_stage = false
 
 func _on_button_pressed() -> void:
 	var ticket = ticket.instantiate()
@@ -28,6 +27,9 @@ func _on_interaction_manager_submit(type: Variant) -> void:
 			child.queue_free()
 			break
 		if child.rng == 2 && type == 8:
+			child.queue_free()
+			break
+		if child.rng == 3 && type == 11:
 			child.queue_free()
 			break
 
@@ -50,38 +52,39 @@ func transition():
 	$CanvasLayer/transitionmessage.visible = true
 	time_remaining = 20
 	
-	fighting_stage = true
+	Global.fighting_stage = true
 
 	
 func _on_timer_timeout() -> void:
 	var ticket = ticket.instantiate()
 	$CanvasLayer/Control/tickets.add_child(ticket)
-	if fighting_stage && counter <= 10 && time_remaining != 0:
-		add_child(foe.instantiate())
+	if Global.fighting_stage && counter <= 10 && time_remaining != 0:
+		instantiate_foe()
 		counter += 1	
 
-func _process(delta: float) -> void:
-	if Input.is_physical_key_pressed(KEY_H):
-		get_tree().change_scene_to_file("res://Scenes/LEVELTWO.tscn")
+func instantiate_foe():
+	add_child(foe.instantiate())
 
+func meow():
+	get_tree().change_scene_to_file("res://Scenes/LEVELTWO.tscn")
 
 func _on_game_timer_timeout() -> void:
 	if time_remaining > 0:
 		time_remaining -=1
 	
-	if time_remaining <= 0 && fighting_stage == true && get_tree().get_nodes_in_group("foes").size()==0:
-		get_tree().change_scene_to_file("res://Scenes/LEVELTWO.tscn")
+	if time_remaining <= 0 && Global.fighting_stage == true && get_tree().get_nodes_in_group("foes").size()==0:
+		meow()
 	#Added open shop
 	if time_remaining <= 0:
 		open_shop()
 		print("test")
 	#ask jason about this cuz i dont know
-	if time_remaining <= 0 && fighting_stage == false && Global.shop_open == false: #Added this so it only transitions if shop is closed
+	if time_remaining <= 0 && Global.fighting_stage == false && Global.shop_open == false: #Added this so it only transitions if shop is closed
 		transition() #will continiously run this
 	
 	
 	else:
-		if fighting_stage:
+		if Global.fighting_stage:
 			$CanvasLayer/timeremaining.text = "Enemy Spawning Phase: " + str(time_remaining)
 		else:
 			$CanvasLayer/timeremaining.text = "Time Remaining: " + str(time_remaining)

@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 
 
 func apply_buff(index: int) -> void:
-	match random_items[0]:
+	match buff_array[index]:
 		"ATK Buff":
 			print("Your ATK has increased")
 			Global.atk_dmg += 5

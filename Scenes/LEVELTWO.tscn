@@ -1,10 +1,11 @@
-[gd_scene load_steps=44 format=3 uid="uid://d1leoiyxpu68i"]
+[gd_scene load_steps=46 format=3 uid="uid://d1leoiyxpu68i"]
 
 [ext_resource type="Script" path="res://Scenes/leveltwo.gd" id="1_ws3xb"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_jgivc"]
 [ext_resource type="PackedScene" uid="uid://ccsxyldn8rq54" path="res://Scenes/playerone.tscn" id="3_jphki"]
 [ext_resource type="Script" path="res://Scripts/playertwo.gd" id="4_18c2d"]
 [ext_resource type="Texture2D" uid="uid://b82d0rdlonjqy" path="res://Images/char2walkingspritesheet.png" id="5_b7dcl"]
+[ext_resource type="Texture2D" uid="uid://cse567bnw0du4" path="res://Images/char2attackspritesheet.png" id="6_f4sr5"]
 [ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="6_t35w5"]
 [ext_resource type="FontFile" uid="uid://brmm5lbpeonae" path="res://Fonts/MONACO.TTF" id="7_nqdgr"]
 [ext_resource type="PackedScene" uid="uid://bc635cnjd78q1" path="res://Scenes/appliance.tscn" id="8_6ebtt"]
@@ -24,6 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://saqpfhfvgcdg" path="res://audio/relaxingpiano.mp3" id="19_t7ras"]
 [ext_resource type="AudioStream" uid="uid://creimf65eihq0" path="res://audio/battle_music.wav" id="20_mdddx"]
 [ext_resource type="Script" path="res://Scenes/mixer_interaction.gd" id="21_jhicv"]
+[ext_resource type="AudioStream" uid="uid://cyhqewdxd16w2" path="res://audio/mixer.mp3" id="22_gk2sb"]
 
 [sub_resource type="Animation" id="Animation_vrhue"]
 length = 0.001
@@ -164,8 +166,14 @@ script = ExtResource("4_18c2d")
 [node name="Sprite2D" parent="playertwo" index="0"]
 texture = ExtResource("5_b7dcl")
 
+[node name="attackSprite" parent="playertwo" index="1"]
+texture = ExtResource("6_f4sr5")
+
 [node name="item" parent="playertwo/Pivot" index="0"]
 material = SubResource("ShaderMaterial_ntf1k")
+
+[node name="AnimationTree" parent="playertwo" index="5"]
+parameters/attack/blend_position = Vector2(0, 0)
 
 [node name="playerone" parent="." instance=ExtResource("3_jphki")]
 z_index = 1
@@ -406,6 +414,9 @@ script = ExtResource("21_jhicv")
 
 [node name="InteractingRegion" parent="mixer/InteractionManager" index="0"]
 shape = SubResource("RectangleShape2D_plmvm")
+
+[node name="AudioStreamPlayer2D" parent="mixer" index="3"]
+stream = ExtResource("22_gk2sb")
 
 [node name="background" type="Sprite2D" parent="."]
 z_index = -2

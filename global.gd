@@ -7,6 +7,8 @@ var crit_dmg = 5
 var crit_rate = 0.2
 var health = 100
 
+var fighting_stage = false
+
 var first_but = true
 var second_but = true
 var third_but = true
