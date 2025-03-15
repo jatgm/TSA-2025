@@ -9,7 +9,7 @@ class_name Player
 var atk_time = 0.0
 var can_attack = true
 var is_attacking = false
-
+var player_fighting_stage = false
 
 enum {
 	EMPTY, 
@@ -28,58 +28,62 @@ enum {
 }
 var state = EMPTY
 
+func ready():
+	state_machine.travel("walk")
+
+
 func advance(step):
 	state = step
-	match state:
-		EMPTY:
-			print("test")
-			$Pivot/item/AnimationPlayer.play("RESET")
-			$Pivot/item.texture = null
-
-		HOLDING_FLOUR:
-			$Pivot/item.texture = load("res://Images/flourspritesheet.png")
-		HOLDING_DOUGH:
-			$Pivot/item.texture = load("res://Images/doughspritesheet.png")
-			$Pivot/item/AnimationPlayer.play("dough animation")
-		
-		HOLDING_BREAD:
-			var possible_bread_sprites = ["res://Images/breadspritesheet.png","res://Images/sourdoughspritesheet.png","res://Images/baguettespritesheet.png"]
-			var rng = randi_range(0,2)
-			if rng != 0:
+	if !player_fighting_stage:
+		match state:
+			EMPTY:
 				$Pivot/item/AnimationPlayer.play("RESET")
-			$Pivot/item.texture = load(possible_bread_sprites[rng])
-			
-		HOLDING_CINNAMON_ROLL:
-			$Pivot/item.texture = load("res://Images/cinnamonrollspritesheet.png")
-			$Pivot/item.material.set_shader_parameter("opacity", 0)
-			$Pivot/item/AnimationPlayer.play("RESET")
-		HOLDING_BAGUETTE:
-			$Pivot/item.texture = load("res://Images/baguettespritesheet.png")
-		HOLDING_SUGARDOUGH:
-			$Pivot/item.material.set_shader_parameter("flash_color", Color(255,255,255))
-			$Pivot/item.material.set_shader_parameter("opacity", .001)
-		
-		HOLDING_DOUGH_BUTTER:
-			$Pivot/item.material.set_shader_parameter("flash_color", Color(255,255,0))
-			$Pivot/item.material.set_shader_parameter("opacity", .001)
+				$Pivot/item.texture = null
 
-		HOLDING_CROISSANT:
-			$Pivot/item.texture = load("res://Images/croissant.png")
-			$Pivot/item.material.set_shader_parameter("opacity", 0)
-			$Pivot/item/AnimationPlayer.play("RESET")
-		
-		HOLDING_DOUGH_BUTTER_SUGAR:
-			$Pivot/item.texture = load("res://Images/cakepremixed.png")
-			$Pivot/item.material.set_shader_parameter("opacity", 0)
-			$Pivot/item/AnimationPlayer.play("RESET")
-		HOLDING_MIXED_DOUGH_BUTTER_SUGAR:
-			$Pivot/item.texture = load("res://Images/cakepostmixed.png")
-			$Pivot/item.material.set_shader_parameter("opacity", 0)
-			$Pivot/item/AnimationPlayer.play("RESET")
-		HOLDING_CAKE:
-			$Pivot/item.texture = load("res://Images/cake.png")
-			$Pivot/item.material.set_shader_parameter("opacity", 0)
-			$Pivot/item/AnimationPlayer.play("RESET")
+			HOLDING_FLOUR:
+				$Pivot/item.texture = load("res://Images/flourspritesheet.png")
+			HOLDING_DOUGH:
+				$Pivot/item.texture = load("res://Images/doughspritesheet.png")
+				$Pivot/item/AnimationPlayer.play("dough animation")
+			
+			HOLDING_BREAD:
+				var possible_bread_sprites = ["res://Images/breadspritesheet.png","res://Images/sourdoughspritesheet.png","res://Images/baguettespritesheet.png"]
+				var rng = randi_range(0,2)
+				if rng != 0:
+					$Pivot/item/AnimationPlayer.play("RESET")
+				$Pivot/item.texture = load(possible_bread_sprites[rng])
+				
+			HOLDING_CINNAMON_ROLL:
+				$Pivot/item.texture = load("res://Images/cinnamonrollspritesheet.png")
+				$Pivot/item.material.set_shader_parameter("opacity", 0)
+				$Pivot/item/AnimationPlayer.play("RESET")
+			HOLDING_BAGUETTE:
+				$Pivot/item.texture = load("res://Images/baguettespritesheet.png")
+			HOLDING_SUGARDOUGH:
+				$Pivot/item.material.set_shader_parameter("flash_color", Color(255,255,255))
+				$Pivot/item.material.set_shader_parameter("opacity", .001)
+			
+			HOLDING_DOUGH_BUTTER:
+				$Pivot/item.material.set_shader_parameter("flash_color", Color(255,255,0))
+				$Pivot/item.material.set_shader_parameter("opacity", .001)
+
+			HOLDING_CROISSANT:
+				$Pivot/item.texture = load("res://Images/croissant.png")
+				$Pivot/item.material.set_shader_parameter("opacity", 0)
+				$Pivot/item/AnimationPlayer.play("RESET")
+			
+			HOLDING_DOUGH_BUTTER_SUGAR:
+				$Pivot/item.texture = load("res://Images/cakepremixed.png")
+				$Pivot/item.material.set_shader_parameter("opacity", 0)
+				$Pivot/item/AnimationPlayer.play("RESET")
+			HOLDING_MIXED_DOUGH_BUTTER_SUGAR:
+				$Pivot/item.texture = load("res://Images/cakepostmixed.png")
+				$Pivot/item.material.set_shader_parameter("opacity", 0)
+				$Pivot/item/AnimationPlayer.play("RESET")
+			HOLDING_CAKE:
+				$Pivot/item.texture = load("res://Images/cake.png")
+				$Pivot/item.material.set_shader_parameter("opacity", 0)
+				$Pivot/item/AnimationPlayer.play("RESET")
 		
 func _physics_process(_delta): # happens 60 times a sec, underscore can represent unused variable
 
@@ -103,18 +107,21 @@ func _physics_process(_delta): # happens 60 times a sec, underscore can represen
 		attack()
 
 func update_animation_parameters(move_input : Vector2):
-	if is_attacking:
-		state_machine.travel("attack",)
-		$AnimationTree.set("parameters/attack/blend_position", move_input)
-
+	if is_attacking && player_fighting_stage:
+		state_machine.travel("attack")
+		
 	else:
 		if move_input != Vector2.ZERO:
 			state_machine.travel("walk")
 			$AnimationTree.set("parameters/walk/blend_position", move_input)
 			$AnimationTree.set("parameters/idle/blend_position", move_input)
 			$AnimationTree.set("parameters/attack/blend_position", move_input)
+			
 		else:
 			state_machine.travel("idle")
+
+func change_fighting_stage():
+	player_fighting_stage = true
 
 func attack():
 	is_attacking = true
@@ -146,4 +153,5 @@ func die():
 	
 
 func _on_timer_timeout() -> void:
+	print("ENDD")
 	is_attacking = false

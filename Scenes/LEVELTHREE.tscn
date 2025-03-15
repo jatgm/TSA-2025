@@ -155,10 +155,10 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3.5, 3.5)
+zoom = Vector2(0.675, 0.675)
 script = ExtResource("2_mcnir")
 
-[node name="playertwo" parent="." instance=ExtResource("3_1bqwf")]
+[node name="playertwo" parent="." groups=["players"] instance=ExtResource("3_1bqwf")]
 z_index = 1
 position = Vector2(58, 4)
 script = ExtResource("4_ybbgq")
@@ -172,10 +172,7 @@ texture = ExtResource("6_dfwj1")
 [node name="item" parent="playertwo/Pivot" index="0"]
 material = SubResource("ShaderMaterial_ntf1k")
 
-[node name="AnimationTree" parent="playertwo" index="5"]
-parameters/attack/blend_position = Vector2(0, 0)
-
-[node name="playerone" parent="." instance=ExtResource("3_1bqwf")]
+[node name="playerone" parent="." groups=["players"] instance=ExtResource("3_1bqwf")]
 z_index = 1
 position = Vector2(-58, 7)
 
@@ -493,8 +490,12 @@ offset_right = 364.0
 offset_bottom = 235.0
 color = Color(0.498039, 0.666667, 0.298039, 1)
 
+[node name="spawnpoint" type="Node2D" parent="."]
+position = Vector2(0, -79)
+
 [connection signal="submit" from="submit/InteractionManager" to="." method="_on_interaction_manager_submit"]
 [connection signal="timeout" from="TicketTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TicketTimer" to="." method="_on_ticket_timer_timeout"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
 
 [editable path="playertwo"]

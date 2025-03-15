@@ -1,42 +1,44 @@
 [gd_scene load_steps=3 format=3 uid="uid://mbvv2dv2372x"]
 
+[ext_resource type="Texture2D" uid="uid://cexemfkvgd0nu" path="res://Images/endscreen.PNG" id="2_5fkdi"]
 [ext_resource type="FontFile" uid="uid://brmm5lbpeonae" path="res://Fonts/MONACO.TTF" id="2_5xche"]
-[ext_resource type="Texture2D" uid="uid://gcgla7i7aj23" path="res://Images/NewTitleScreen.png" id="3_x2hju"]
 
 [node name="endoflevel" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -275.0
+offset_left = -216.0
 offset_top = -70.0
-offset_right = 275.0
+offset_right = 216.0
 offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("2_5xche")
 theme_override_font_sizes/normal_font_size = 100
-text = "LEVEL TWO"
+text = "THE END"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -169.0
+offset_left = -198.0
 offset_top = -140.0
-offset_right = 169.0
+offset_right = 198.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/normal_font = ExtResource("2_5xche")
 theme_override_font_sizes/normal_font_size = 30
-text = "TO BE CONTINUED!"
+text = "Thank you for playing!"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 z_index = -1
@@ -54,7 +56,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -66,4 +67,4 @@ offset_right = 640.0
 offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_x2hju")
+texture = ExtResource("2_5fkdi")

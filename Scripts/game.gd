@@ -6,8 +6,8 @@ extends Node
 @onready var shop_scene = preload("res://Scenes/shop.tscn")
 var shop_instance = null
 
-
-var time_remaining = 1
+var fighting_stage = false
+var time_remaining = 60
 var counter = 0
 
 func _on_button_pressed() -> void:
@@ -52,18 +52,24 @@ func transition():
 	$CanvasLayer/transitionmessage.visible = true
 	time_remaining = 20
 	
-	Global.fighting_stage = true
+	fighting_stage = true
+	get_tree().call_group("players", "change_fighting_stage")
+
 
 	
 func _on_timer_timeout() -> void:
-	var ticket = ticket.instantiate()
-	$CanvasLayer/Control/tickets.add_child(ticket)
-	if Global.fighting_stage && counter <= 10 && time_remaining != 0:
+	instantiate_ticket()
+	
+	if fighting_stage && counter <= 10 && time_remaining != 0:
 		instantiate_foe()
 		counter += 1	
 
 func instantiate_foe():
 	add_child(foe.instantiate())
+
+func instantiate_ticket():
+	var ticket = ticket.instantiate()
+	$CanvasLayer/Control/tickets.add_child(ticket)
 
 func meow():
 	get_tree().change_scene_to_file("res://Scenes/LEVELTWO.tscn")
@@ -72,19 +78,18 @@ func _on_game_timer_timeout() -> void:
 	if time_remaining > 0:
 		time_remaining -=1
 	
-	if time_remaining <= 0 && Global.fighting_stage == true && get_tree().get_nodes_in_group("foes").size()==0:
+	if time_remaining <= 0 && fighting_stage == true && get_tree().get_nodes_in_group("foes").size()==0:
 		meow()
 	#Added open shop
 	if time_remaining <= 0:
 		open_shop()
-		print("test")
 	#ask jason about this cuz i dont know
-	if time_remaining <= 0 && Global.fighting_stage == false && Global.shop_open == false: #Added this so it only transitions if shop is closed
+	if time_remaining <= 0 && fighting_stage == false && Global.shop_open == false: #Added this so it only transitions if shop is closed
 		transition() #will continiously run this
 	
 	
 	else:
-		if Global.fighting_stage:
+		if fighting_stage:
 			$CanvasLayer/timeremaining.text = "Enemy Spawning Phase: " + str(time_remaining)
 		else:
 			$CanvasLayer/timeremaining.text = "Time Remaining: " + str(time_remaining)

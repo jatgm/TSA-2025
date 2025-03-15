@@ -19,13 +19,15 @@ func _ready():
 	$AnimationPlayer.play("walking")
 	
 func _physics_process(_delta):
+	
 	var closer_player
 	if position.distance_to(playerone.position) < position.distance_to(playertwo.position):
 		closer_player = playerone
 	else:
 		closer_player = playertwo	
 	
-	
+	velocity = Vector2.ZERO  
+
 	if position.distance_to(closer_player.position) > 25:
 		velocity = (position.direction_to(closer_player.position))*50
 	else:

@@ -158,7 +158,7 @@ libraries = {
 zoom = Vector2(3.5, 3.5)
 script = ExtResource("2_jgivc")
 
-[node name="playertwo" parent="." instance=ExtResource("3_jphki")]
+[node name="playertwo" parent="." groups=["players"] instance=ExtResource("3_jphki")]
 z_index = 1
 position = Vector2(58, 4)
 script = ExtResource("4_18c2d")
@@ -172,10 +172,7 @@ texture = ExtResource("6_f4sr5")
 [node name="item" parent="playertwo/Pivot" index="0"]
 material = SubResource("ShaderMaterial_ntf1k")
 
-[node name="AnimationTree" parent="playertwo" index="5"]
-parameters/attack/blend_position = Vector2(0, 0)
-
-[node name="playerone" parent="." instance=ExtResource("3_jphki")]
+[node name="playerone" parent="." groups=["players"] instance=ExtResource("3_jphki")]
 z_index = 1
 position = Vector2(-58, 7)
 

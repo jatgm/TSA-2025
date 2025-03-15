@@ -1,0 +1,515 @@
+[gd_scene load_steps=46 format=3 uid="uid://b0w8yagjkn52o"]
+
+[ext_resource type="Script" path="res://Scenes/levelseven.gd" id="1_6e8hj"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="2_jtpof"]
+[ext_resource type="PackedScene" uid="uid://ccsxyldn8rq54" path="res://Scenes/playerone.tscn" id="3_vke3w"]
+[ext_resource type="Script" path="res://Scripts/playertwo.gd" id="4_j8bbp"]
+[ext_resource type="Texture2D" uid="uid://b82d0rdlonjqy" path="res://Images/char2walkingspritesheet.png" id="5_jghrh"]
+[ext_resource type="Texture2D" uid="uid://cse567bnw0du4" path="res://Images/char2attackspritesheet.png" id="6_s3uvj"]
+[ext_resource type="Shader" path="res://Shaders/highlight.gdshader" id="7_ddfv5"]
+[ext_resource type="FontFile" uid="uid://brmm5lbpeonae" path="res://Fonts/MONACO.TTF" id="8_66qk1"]
+[ext_resource type="PackedScene" uid="uid://bc635cnjd78q1" path="res://Scenes/appliance.tscn" id="9_vw5fw"]
+[ext_resource type="Script" path="res://Scenes/sinkinteraction.gd" id="10_kl462"]
+[ext_resource type="AudioStream" uid="uid://bv64qa0wm5vow" path="res://audio/audacity_sink.mp3" id="11_lsawd"]
+[ext_resource type="Script" path="res://Scripts/flourstationinteraction.gd" id="12_mavps"]
+[ext_resource type="AudioStream" uid="uid://ypj1uf18t6re" path="res://audio/audacity_dough.mp3" id="13_8g2qo"]
+[ext_resource type="Script" path="res://Scenes/oveninteraction.gd" id="14_xxvx3"]
+[ext_resource type="AudioStream" uid="uid://t7fk27ibm0y1" path="res://audio/ding.wav" id="15_4fn0h"]
+[ext_resource type="Script" path="res://Scenes/submitinteraction.gd" id="16_6wk65"]
+[ext_resource type="AudioStream" uid="uid://cgf8k7ea4510p" path="res://audio/blipSelect.wav" id="17_1sbs7"]
+[ext_resource type="Script" path="res://Scenes/sugarinteraction.gd" id="18_ik8h5"]
+[ext_resource type="Texture2D" uid="uid://d2siqolbe3o7k" path="res://Images/butter.png" id="19_wbwym"]
+[ext_resource type="Script" path="res://Scenes/butterinteraction.gd" id="20_ls68u"]
+[ext_resource type="Texture2D" uid="uid://n75lox4fkab" path="res://Images/standmixer.png" id="21_m0i64"]
+[ext_resource type="Script" path="res://Scenes/mixer_interaction.gd" id="22_c571d"]
+[ext_resource type="AudioStream" uid="uid://cyhqewdxd16w2" path="res://audio/mixer.mp3" id="23_lnc38"]
+[ext_resource type="Texture2D" uid="uid://diry1xbepgsoi" path="res://Images/bakery.png" id="24_ls2qi"]
+[ext_resource type="AudioStream" uid="uid://saqpfhfvgcdg" path="res://audio/relaxingpiano.mp3" id="25_v42hl"]
+[ext_resource type="AudioStream" uid="uid://creimf65eihq0" path="res://audio/battle_music.wav" id="26_3rup2"]
+
+[sub_resource type="Animation" id="Animation_vrhue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0.980392, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_r20gu"]
+resource_name = "daytonight"
+length = 60.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0.980392, 1), Color(0.376471, 0.709804, 0.980392, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s0bu0"]
+_data = {
+"RESET": SubResource("Animation_vrhue"),
+"daytonight": SubResource("Animation_r20gu")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ntf1k"]
+resource_local_to_scene = true
+shader = ExtResource("7_ddfv5")
+shader_parameter/flash_color = Color(1, 1, 1, 0.596078)
+shader_parameter/opacity = 0.0
+
+[sub_resource type="Animation" id="Animation_fpf2e"]
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_42gns"]
+resource_name = "fade"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vjnlm"]
+_data = {
+"RESET": SubResource("Animation_fpf2e"),
+"fade": SubResource("Animation_42gns")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ou40"]
+size = Vector2(30, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxpex"]
+size = Vector2(20, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0va4"]
+size = Vector2(21, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgw2h"]
+size = Vector2(19, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q67oc"]
+size = Vector2(25, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tiqs"]
+size = Vector2(36, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plmvm"]
+size = Vector2(24, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n573x"]
+size = Vector2(58.5317, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjsdq"]
+size = Vector2(9.45679, 158.54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4t27p"]
+size = Vector2(237, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0k5s"]
+size = Vector2(24, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwrhl"]
+size = Vector2(36.9099, 6)
+
+[node name="Game" type="Node"]
+script = ExtResource("1_6e8hj")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 1, 0.980392, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasModulate"]
+libraries = {
+"": SubResource("AnimationLibrary_s0bu0")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+script = ExtResource("2_jtpof")
+
+[node name="playertwo" parent="." groups=["players"] instance=ExtResource("3_vke3w")]
+z_index = 1
+position = Vector2(58, 4)
+script = ExtResource("4_j8bbp")
+
+[node name="Sprite2D" parent="playertwo" index="0"]
+texture = ExtResource("5_jghrh")
+
+[node name="attackSprite" parent="playertwo" index="1"]
+texture = ExtResource("6_s3uvj")
+
+[node name="item" parent="playertwo/Pivot" index="0"]
+material = SubResource("ShaderMaterial_ntf1k")
+
+[node name="playerone" parent="." groups=["players"] instance=ExtResource("3_vke3w")]
+z_index = 1
+position = Vector2(-58, 7)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 338.0
+metadata/_edit_use_anchors_ = true
+
+[node name="tickets" type="HBoxContainer" parent="CanvasLayer/Control"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -961.0
+offset_right = 961.0
+offset_bottom = 362.0
+grow_horizontal = 2
+theme_override_constants/separation = 140
+metadata/_edit_use_anchors_ = true
+
+[node name="timeremaining" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_right = 322.0
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("8_66qk1")
+theme_override_font_sizes/normal_font_size = 15
+text = "Time Remaining:"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="transitionmessage" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -532.0
+offset_right = 533.0
+offset_bottom = 105.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("8_66qk1")
+theme_override_font_sizes/normal_font_size = 30
+text = "It's night time... your store is now overrun with bacteria!
+Defeat all the bacteria in the kitchen to move on!"
+scroll_active = false
+
+[node name="controls" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -68.0
+offset_right = 280.0
+offset_bottom = 68.0
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("8_66qk1")
+theme_override_font_sizes/normal_font_size = 15
+text = "Controls
+Player One
+[WASD] - Move
+[E] - Interact/Attack
+Player Two
+[Arrow Keys] - Move
+[Right Shift] - Interact/Attack"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="DayTwoLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.451562
+anchor_top = 0.5
+anchor_right = 0.548437
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -63.0
+offset_right = 273.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("8_66qk1")
+theme_override_font_sizes/normal_font_size = 100
+text = "LEVEL THREE"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/DayTwoLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_vjnlm")
+}
+
+[node name="sink" parent="." instance=ExtResource("9_vw5fw")]
+position = Vector2(-62, -66)
+
+[node name="ColorRect" parent="sink" index="0"]
+offset_left = -8.0
+offset_top = -6.0
+offset_right = 10.0
+offset_bottom = 8.0
+
+[node name="InteractionManager" parent="sink" index="2"]
+script = ExtResource("10_kl462")
+
+[node name="InteractingRegion" parent="sink/InteractionManager" index="0"]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_6ou40")
+
+[node name="AudioStreamPlayer2D" parent="sink" index="3"]
+stream = ExtResource("11_lsawd")
+volume_db = -9.0
+bus = &"fx"
+
+[node name="flourstation" parent="." instance=ExtResource("9_vw5fw")]
+position = Vector2(-113, -10)
+
+[node name="ColorRect" parent="flourstation" index="0"]
+offset_left = 2.0
+offset_top = -4.0
+offset_right = 21.0
+offset_bottom = 30.0
+
+[node name="InteractionManager" parent="flourstation" index="2"]
+script = ExtResource("12_mavps")
+
+[node name="InteractingRegion" parent="flourstation/InteractionManager" index="0"]
+position = Vector2(11, 14)
+shape = SubResource("RectangleShape2D_mxpex")
+
+[node name="AudioStreamPlayer2D" parent="flourstation" index="3"]
+stream = ExtResource("13_8g2qo")
+bus = &"fx"
+
+[node name="oven" parent="." instance=ExtResource("9_vw5fw")]
+position = Vector2(54, -72)
+
+[node name="ColorRect" parent="oven" index="0"]
+offset_left = -2.0
+offset_top = -5.0
+offset_right = 19.0
+offset_bottom = 24.0
+
+[node name="InteractionManager" parent="oven" index="2"]
+script = ExtResource("14_xxvx3")
+
+[node name="InteractingRegion" parent="oven/InteractionManager" index="0"]
+position = Vector2(8.5, 10)
+shape = SubResource("RectangleShape2D_v0va4")
+
+[node name="AudioStreamPlayer2D" parent="oven" index="3"]
+stream = ExtResource("15_4fn0h")
+bus = &"fx"
+
+[node name="submit" parent="." instance=ExtResource("9_vw5fw")]
+position = Vector2(-9, -6)
+
+[node name="ColorRect" parent="submit" index="0"]
+offset_left = -5.0
+offset_top = -3.0
+offset_right = 22.0
+offset_bottom = 14.0
+
+[node name="InteractionManager" parent="submit" index="2"]
+script = ExtResource("16_6wk65")
+
+[node name="InteractingRegion" parent="submit/InteractionManager" index="0"]
+position = Vector2(8.5, 4.5)
+shape = SubResource("RectangleShape2D_tgw2h")
+
+[node name="AudioStreamPlayer2D" parent="submit" index="3"]
+stream = ExtResource("17_1sbs7")
+bus = &"fx"
+
+[node name="sugar" parent="." instance=ExtResource("9_vw5fw")]
+position = Vector2(7, 71)
+
+[node name="ColorRect" parent="sugar" index="0"]
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 14.0
+offset_bottom = 17.0
+
+[node name="InteractionManager" parent="sugar" index="2"]
+script = ExtResource("18_ik8h5")
+
+[node name="InteractingRegion" parent="sugar/InteractionManager" index="0"]
+position = Vector2(12, 5)
+shape = SubResource("RectangleShape2D_q67oc")
+
+[node name="AudioStreamPlayer2D" parent="sugar" index="3"]
+stream = ExtResource("13_8g2qo")
+bus = &"fx"
+
+[node name="butter" parent="." instance=ExtResource("9_vw5fw")]
+position = Vector2(-80, 82)
+
+[node name="ColorRect" parent="butter" index="0"]
+z_index = 1
+offset_left = -17.0
+offset_top = -9.0
+offset_right = 18.0
+offset_bottom = 14.0
+
+[node name="Sprite2D" parent="butter" index="1"]
+texture = ExtResource("19_wbwym")
+
+[node name="InteractionManager" parent="butter" index="2"]
+script = ExtResource("20_ls68u")
+
+[node name="InteractingRegion" parent="butter/InteractionManager" index="0"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_6tiqs")
+
+[node name="AudioStreamPlayer2D" parent="butter" index="3"]
+stream = ExtResource("13_8g2qo")
+
+[node name="mixer" parent="." instance=ExtResource("9_vw5fw")]
+position = Vector2(99, -2)
+
+[node name="ColorRect" parent="mixer" index="0"]
+z_index = 1
+offset_left = -12.0
+offset_top = -13.0
+offset_right = 12.0
+offset_bottom = 13.0
+
+[node name="Sprite2D" parent="mixer" index="1"]
+texture = ExtResource("21_m0i64")
+
+[node name="InteractionManager" parent="mixer" index="2"]
+script = ExtResource("22_c571d")
+
+[node name="InteractingRegion" parent="mixer/InteractionManager" index="0"]
+shape = SubResource("RectangleShape2D_plmvm")
+
+[node name="AudioStreamPlayer2D" parent="mixer" index="3"]
+stream = ExtResource("23_lnc38")
+
+[node name="background" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(1, 0)
+texture = ExtResource("24_ls2qi")
+metadata/_edit_lock_ = true
+
+[node name="walls" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
+position = Vector2(-71, -65)
+shape = SubResource("RectangleShape2D_n573x")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="walls"]
+position = Vector2(-75, -65)
+shape = SubResource("RectangleShape2D_n573x")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="walls"]
+position = Vector2(0, -100)
+shape = SubResource("RectangleShape2D_n573x")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
+position = Vector2(76, -66)
+shape = SubResource("RectangleShape2D_n573x")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls"]
+position = Vector2(-108, 11)
+rotation = 0.186704
+shape = SubResource("RectangleShape2D_kjsdq")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls"]
+position = Vector2(104, 10)
+rotation = -0.16502
+shape = SubResource("RectangleShape2D_kjsdq")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="walls"]
+position = Vector2(-2.5, 93.5)
+shape = SubResource("RectangleShape2D_4t27p")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="walls"]
+position = Vector2(-1, 45)
+shape = SubResource("RectangleShape2D_p0k5s")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="walls"]
+position = Vector2(48, -84)
+rotation = -1.95774
+shape = SubResource("RectangleShape2D_dwrhl")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="walls"]
+position = Vector2(-50, -84)
+rotation = -1.04967
+shape = SubResource("RectangleShape2D_dwrhl")
+
+[node name="TicketTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="piano" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_v42hl")
+bus = &"high pass filter"
+
+[node name="battle_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_3rup2")
+volume_db = -8.407
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = -5
+offset_left = -368.0
+offset_top = -231.0
+offset_right = 364.0
+offset_bottom = 235.0
+color = Color(0.498039, 0.666667, 0.298039, 1)
+
+[node name="spawnpoint" type="Node2D" parent="."]
+position = Vector2(0, -79)
+
+[connection signal="submit" from="submit/InteractionManager" to="." method="_on_interaction_manager_submit"]
+[connection signal="timeout" from="TicketTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+
+[editable path="playertwo"]
+[editable path="playertwo/Pivot/InteractionManager"]
+[editable path="sink"]
+[editable path="sink/InteractionManager"]
+[editable path="flourstation"]
+[editable path="flourstation/InteractionManager"]
+[editable path="oven"]
+[editable path="oven/InteractionManager"]
+[editable path="submit"]
+[editable path="submit/InteractionManager"]
+[editable path="sugar"]
+[editable path="sugar/InteractionManager"]
+[editable path="butter"]
+[editable path="butter/InteractionManager"]
+[editable path="mixer"]
+[editable path="mixer/InteractionManager"]
